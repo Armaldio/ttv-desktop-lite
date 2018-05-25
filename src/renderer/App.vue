@@ -12,4 +12,8 @@
 
 <style>
   /* CSS */
+  #app, body {
+    overflow: hidden;
+    margin: 0;
+  }
 </style>
