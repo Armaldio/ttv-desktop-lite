@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <v-app>
+            <AppBar></AppBar>
             <v-content class="primary">
                 <v-container fluid fill-height>
                     <router-view></router-view>
@@ -11,8 +12,13 @@
 </template>
 
 <script>
+  import AppBar from './components/AppBar';
+
   export default {
     name: 'twitchy-desktop-lite',
+    components: {
+      AppBar,
+    },
   };
 </script>
 
