@@ -1,7 +1,13 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+    <div id="app">
+        <v-app>
+            <v-content class="primary">
+                <v-container fluid fill-height>
+                    <router-view></router-view>
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
 </template>
 
 <script>
@@ -11,9 +17,9 @@
 </script>
 
 <style>
-  /* CSS */
-  #app, body {
-    overflow: hidden;
-    margin: 0;
-  }
+    /* CSS */
+    #app, body {
+        overflow: hidden;
+        margin: 0;
+    }
 </style>

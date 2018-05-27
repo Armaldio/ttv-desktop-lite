@@ -6,9 +6,14 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'landing-page',
+      path: '/twitch',
+      name: 'home',
       component: require('@/components/Home').default,
+    },
+    {
+      path: '/',
+      name: 'start',
+      component: require('@/components/StartingPage').default,
     },
     {
       path: '*',
