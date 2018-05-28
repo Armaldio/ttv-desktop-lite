@@ -1,6 +1,7 @@
 import lowdb from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
 import path from 'path';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { remote } from 'electron';
 
 const DB = {
