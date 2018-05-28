@@ -8,18 +8,11 @@ import App from './App';
 import router from './router';
 import store from './store';
 import db from './scripts/database';
+import theme from '../theme/theme.js';
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
 Vue.use(Vuetify, {
-  theme: {
-    primary: '#6441a5',
-    secondary: '#4b408b',
-    // accent: '#8c9eff',
-    // error: '#b71c1c',
-
-    white: '#fff',
-    grey: '#D3D3D3',
-  },
+  theme,
 });
 Vue.use(db);
 

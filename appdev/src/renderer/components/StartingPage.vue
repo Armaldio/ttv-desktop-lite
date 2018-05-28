@@ -34,16 +34,38 @@
                 </v-flex>
                 <v-flex xs4>
                     <v-card class="secondary">
-                        <v-card-text>Ublock Origin</v-card-text>
+                        <v-card-title class="headline text-xs-center">
+                            Ublock Origin
+                        </v-card-title>
+                        <v-card-media class="py-1" contain src="/static/betterttv-icon.png"
+                                      height="100px"></v-card-media>
+                        <v-card-text>
+                            <div>XXXX</div>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn class="white--text" v-if="extensions.ublock" color="green">Enabled</v-btn>
+                            <v-btn class="white--text" v-else color="red">Disabled</v-btn>
+                        </v-card-actions>
                     </v-card>
                 </v-flex>
                 <v-flex xs4>
                     <v-card class="secondary">
-                        <v-card-text>FrankerFaceZ</v-card-text>
+                        <v-card-title class="headline text-xs-center">
+                            FrankerFaceZ
+                        </v-card-title>
+                        <v-card-media class="py-1" contain src="/static/betterttv-icon.png"
+                                      height="100px"></v-card-media>
+                        <v-card-text>
+                            <div>XXXX</div>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn class="white--text" v-if="extensions.frankerfacez" color="green">Enabled</v-btn>
+                            <v-btn class="white--text" v-else color="red">Disabled</v-btn>
+                        </v-card-actions>
                     </v-card>
                 </v-flex>
             </v-layout>
-            <v-btn class="secondary">Save and continue</v-btn>
+            <v-btn @click="$router.push('/twitch')" class="secondary">Save and continue</v-btn>
             <v-checkbox class="again-checkbox"
                         label="Don't show the starting page again"
                         v-model="checkbox">
@@ -62,6 +84,8 @@
         checkbox: false,
         extensions: {
           betterttv: false,
+          ublock: false,
+          frankerfacez: false,
         },
       };
     },

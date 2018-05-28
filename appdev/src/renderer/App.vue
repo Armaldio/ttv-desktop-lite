@@ -24,8 +24,13 @@
 
 <style>
     /* CSS */
-    #app, body {
+    #app {
         overflow: hidden;
         margin: 0;
+    }
+
+    .container {
+        margin: 0;
+        padding: 0;
     }
 </style>
