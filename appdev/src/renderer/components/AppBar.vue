@@ -2,7 +2,7 @@
     <v-system-bar style="-webkit-app-region: drag; height: 25px; background-color: #2c2541;" window dark>
         <v-icon>menu</v-icon>
 		<v-spacer style="-webkit-app-region: drag;"></v-spacer>
-		<v-text style="-webkit-app-region: drag;">Twitchy Desktop Light</v-text>
+		<v-toolbar-title style="-webkit-app-region: drag;">Twitchy Desktop Light</v-toolbar-title>
 		<v-spacer style="-webkit-app-region: drag;"></v-spacer>
         <v-icon @click="$electron.remote.getCurrentWindow().minimize()">remove</v-icon>
         <v-icon @click="toggleRestore">check_box_outline_blank</v-icon>
