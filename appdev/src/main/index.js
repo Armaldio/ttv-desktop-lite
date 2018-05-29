@@ -1,11 +1,11 @@
-import { app, BrowserWindow } from 'electron' // eslint-disable-line
+import {app, BrowserWindow} from 'electron'; // eslint-disable-line
 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
+  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\'); // eslint-disable-line
 }
 
 let mainWindow;
@@ -23,6 +23,21 @@ function createWindow() {
     width: 1000,
     frame: false,
   });
+
+  const extensions = [
+    './src/extensions/bttv',
+    './src/extensions/ublock',
+    './src/extensions/frankerfacez',
+  ];
+
+  const installedExtensions = BrowserWindow.getExtensions();
+  console.log(installedExtensions);
+
+  for (let i = 0; i < extensions.length; i += 1) {
+    const extension = extensions[i];
+    const installed = BrowserWindow.addExtension(extension);
+    console.log('Installing ', installed);
+  }
 
   mainWindow.maximize();
 
