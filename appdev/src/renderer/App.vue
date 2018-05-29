@@ -26,6 +26,7 @@
     /* CSS */
 	html {
 		overflow: hidden;
+		user-select: none !important;
 		-webkit-user-select: none !important;
 	}
 	
