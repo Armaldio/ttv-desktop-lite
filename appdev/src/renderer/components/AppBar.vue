@@ -26,7 +26,7 @@
 <style scoped>
     .icon {
         -webkit-app-region: no-drag;
-        user-select: none;
+		-webkit-user-select: none !important;
         cursor: pointer;
     }
 </style>

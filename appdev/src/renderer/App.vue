@@ -24,6 +24,11 @@
 
 <style>
     /* CSS */
+	html {
+		overflow: hidden;
+		-webkit-user-select: none !important;
+	}
+	
     #app {
         overflow: hidden;
         margin: 0;
