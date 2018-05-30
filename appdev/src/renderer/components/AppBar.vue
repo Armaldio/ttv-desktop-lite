@@ -1,5 +1,5 @@
 <template>
-    <v-system-bar style="-webkit-app-region: drag; height: 25px; background-color: #2c2541;" window dark>
+    <v-system-bar class="appbar" style="-webkit-app-region: drag; height: 25px; background-color: #2c2541;" window dark>
         <v-icon @click="showMenu">menu</v-icon>
         <v-spacer style="-webkit-app-region: drag;"></v-spacer>
         <v-toolbar-title style="-webkit-app-region: drag; font-size: 12px;">Twitchy Desktop Light</v-toolbar-title>
@@ -101,33 +101,36 @@
 </script>
 
 <style scoped>
+	.appbar {
+		padding: 0px;
+	}
+	
     .material-icons {
         -webkit-app-region: no-drag;
         -webkit-user-select: none !important;
+		transition: none;
         cursor: pointer;
         height: 25px;
         padding-top: 3px;
-        padding-left: 3px;
-        padding-right: 3px;
-        background-color: rgba(100, 100, 100, 0.0);
-        transition: border-bottom 100ms ease-in-out;
-        border-bottom: 1px solid hsla(0, 0%, 100%, .0);
+        padding-left: 10px;
+        padding-right: 10px;
+		margin-right: 0px;
+        background-color: transparent;
     }
 
     .material-icons:hover {
-        border-bottom: 1px solid hsla(0, 0%, 100%, .7);
+		background-color: hsla(0,0%,100%,.05);
     }
-
-    .material-icons:active {
-        background-color: rgba(100, 100, 100, 0.3);
-    }
-
-    .close:hover {
-        border-bottom: 1px solid #fc3636;
-    }
-
-    .close:active {
-        background-color: rgba(255, 0, 0, 0.3);
-        border-bottom: 1px solid #fc3636;
+	
+	.application .theme--dark.system-bar .icon, .theme--dark .system-bar .icon {
+		color: rgba(150, 150, 150, 1.0);
+	}
+	
+	.application:hover .theme--dark.system-bar .icon:hover, .theme--dark:hover .system-bar:hover .icon:hover {
+		color: rgba(255, 255, 255, 1.0);
+	}
+	
+	.close:hover {
+		background-color: rgba(255, 0, 0, 0.75);
     }
 </style>
