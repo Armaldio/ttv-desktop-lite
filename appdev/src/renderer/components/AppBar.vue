@@ -5,7 +5,7 @@
         <v-toolbar-title style="-webkit-app-region: drag; font-size: 12px;">Twitchy Desktop Light</v-toolbar-title>
         <v-spacer style="-webkit-app-region: drag;"></v-spacer>
         <v-icon @click="$electron.remote.getCurrentWindow().minimize()">remove</v-icon>
-        <v-icon @click="toggleRestore">check_box_outline_blank</v-icon>
+        <v-icon @click="toggleRestore">crop_square</v-icon>
         <v-icon @click="$electron.remote.app.quit()" class="close">close</v-icon>
     </v-system-bar>
 </template>
