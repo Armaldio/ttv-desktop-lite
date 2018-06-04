@@ -26,7 +26,7 @@
           {
             submenu: [
               {
-                label: 'Toggle fullscreen',
+                label: 'Toggle Fullscreen',
                 click: () => {
 
                 },
@@ -71,7 +71,7 @@
               },
               {
                 type: 'checkbox',
-                label: 'Enable low-end Software Rendering Mode',
+                label: 'Enable Low-end Software Rendering Mode',
                 checked: true,
               }, {
                 type: 'checkbox',
@@ -80,7 +80,7 @@
               },
               {
                 type: 'checkbox',
-                label: 'Enable all custom Sounds (for Twitchy)',
+                label: 'Enable all Custom Sounds (for Twitchy)',
                 checked: true,
               },
             ],
@@ -90,7 +90,7 @@
             visible: false,
           },
           {
-            label: 'Set default Twitch.tv page',
+            label: 'Set Twitch.TV Startup Page',
           },
           {
             type: 'separator',
@@ -100,7 +100,7 @@
             label: 'Extensions',
             submenu: [
               {
-                label: 'UBlock Origin (Ad blocker)',
+                label: 'UBlock Origin (Adblocker)',
               },
               {
                 label: 'BetterTTV (Enhancement)',
