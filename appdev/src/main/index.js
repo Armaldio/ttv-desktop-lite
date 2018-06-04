@@ -1,4 +1,5 @@
 import {app, BrowserWindow} from 'electron'; // eslint-disable-line
+import fs from 'fs';
 
 /**
  * Set `__static` path to static files in production
@@ -35,8 +36,12 @@ function createWindow() {
 
   for (let i = 0; i < extensions.length; i += 1) {
     const extension = extensions[i];
-    const installed = BrowserWindow.addExtension(extension);
-    console.log('Installing ', installed);
+    if (fs.existsSync(extension)) {
+      const installed = BrowserWindow.addExtension(extension);
+      console.log('Installing ', installed);
+    } else {
+      console.log(`Missing ${extension}`);
+    }
   }
 
   mainWindow.maximize();
@@ -45,6 +50,15 @@ function createWindow() {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+  });
+
+  mainWindow.webContents.on('new-window', (event, url) => {
+    event.preventDefault();
+    console.log('opening new window');
+    const win = new BrowserWindow({ show: true });
+    win.once('ready-to-show', () => win.show());
+    win.loadURL(url);
+    event.newGuest = win;
   });
 }
 

@@ -43,6 +43,8 @@
             </v-flex>
 
             <v-text-field placeholder="Default Twitch.tv url">https://twitch.tv</v-text-field>
+
+            <v-btn @click="$router.push('/')">Back</v-btn>
         </v-layout>
     </main>
 </template>
