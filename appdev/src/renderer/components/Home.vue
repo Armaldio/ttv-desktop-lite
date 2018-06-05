@@ -1,7 +1,7 @@
 <template>
     <div id="wrapper">
         <main>
-            <webview id="foo" src="https://twitch.tv/" allowpopups
+            <webview id="webview" src="https://twitch.tv/" allowpopups
                      style="display:inline-flex; width:100%; height:100vh;"></webview>
         </main>
     </div>

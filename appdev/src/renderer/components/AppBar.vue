@@ -22,7 +22,12 @@
     name: 'AppBar',
     data() {
       return {
-        menu: [
+        webview: null,
+      };
+    },
+    computed: {
+      menu() {
+        return [
           {
             submenu: [
               {
@@ -41,13 +46,16 @@
               },
               {
                 label: '← Back',
+                enabled: this.webview.canGoBack(),
                 click: () => {
-
+                  this.webview.goBack();
                 },
               },
               {
                 label: '→ Forward',
+                enabled: this.webview.canGoForward(),
                 click: () => {
+                  this.webview.goForward();
                 },
               },
             ],
@@ -122,8 +130,8 @@
             click: () => {
             },
           },
-        ],
-      };
+        ];
+      },
     },
     methods: {
       goToSettings() {
@@ -153,7 +161,7 @@
       },
     },
     mounted() {
-
+      this.webview = document.querySelector('#webview');
     },
   };
 </script>
