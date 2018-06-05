@@ -67,7 +67,7 @@
 
         valid: false,
 
-        aboutModal: true,
+        aboutModal: false,
 
         inputValue: this.$db.get('settings.defaultPage').value(),
         textRules: [
