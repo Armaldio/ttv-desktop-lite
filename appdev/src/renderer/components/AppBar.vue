@@ -1,5 +1,5 @@
 <template>
-    <v-system-bar window dark>
+    <v-system-bar style="height: 25px;" window dark>
         <v-icon @click="showMenu">menu</v-icon>
         <v-spacer></v-spacer>
         <v-toolbar-title class="main-title">
@@ -40,13 +40,13 @@
                 accelerator: 'CmdOrCtrl+R',
               },
               {
-                label: 'Back',
+                label: '← Back',
                 click: () => {
 
                 },
               },
               {
-                label: 'Forward',
+                label: '→ Forward',
                 click: () => {
                 },
               },
