@@ -1,15 +1,55 @@
 <template>
-    <v-system-bar style="height: 25px;" window dark>
-        <v-icon @click="showMenu">menu</v-icon>
-        <v-spacer></v-spacer>
-        <v-toolbar-title class="main-title">
-            Twitchy Desktop Light
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-icon @click="$electron.remote.getCurrentWindow().minimize()">remove</v-icon>
-        <v-icon @click="toggleRestore">crop_square</v-icon>
-        <v-icon @click="$electron.remote.app.quit()" class="close">close</v-icon>
-    </v-system-bar>
+    <div>
+        <v-system-bar style="height: 25px;" window dark>
+            <v-icon @click="showMenu">menu</v-icon>
+            <v-spacer></v-spacer>
+            <v-toolbar-title class="main-title">
+                Twitchy Desktop Light
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-icon @click="$electron.remote.getCurrentWindow().minimize()">remove</v-icon>
+            <v-icon @click="toggleRestore">crop_square</v-icon>
+            <v-icon @click="$electron.remote.app.quit()" class="close">close</v-icon>
+        </v-system-bar>
+        <v-dialog v-model="editTwitchPagePopup" max-width="500px">
+            <v-card>
+                <v-card-title>
+                    <span>Set Twitch.TV Startup Page</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-form v-model="valid">
+                        <v-text-field
+                                :rules="textRules"
+                                label="Startup page"
+                                placeholder="https://twitch.tv"
+                                v-model="inputValue"
+                        ></v-text-field>
+                    </v-form>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn :disabled="!valid" color="primary" flat @click.stop="saveChanges">Save</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <v-dialog v-model="aboutModal" max-width="500px">
+            <v-card>
+                <v-card-title class="centered">
+                    <span>About Twitchy Desktop Light</span>
+                </v-card-title>
+                <v-card-text>
+                    <img class="centered" width="100" src="/static/twitchy_icon.png" alt="">
+                    <p>Twitchy Desktop Light</p>
+                    <p>xxxxx</p>
+                    <p>Desing this window as you want (withing <b>v-card-text</b>)</p>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" flat @click.stop="aboutModal = false">Close</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </div>
 </template>
 
 <script>
@@ -23,6 +63,16 @@
     data() {
       return {
         webview: null,
+        editTwitchPagePopup: false,
+
+        valid: false,
+
+        aboutModal: true,
+
+        inputValue: this.$db.get('settings.defaultPage').value(),
+        textRules: [
+          v => v.startsWith('https://twitch.tv') || 'Url must start with \'https://twitch.tv\'',
+        ],
       };
     },
     computed: {
@@ -67,17 +117,20 @@
               {
                 type: 'checkbox',
                 label: 'Run Twitchy when my Computer starts',
-                checked: true,
+                checked: false,
+                enabled: false,
               },
               {
                 type: 'checkbox',
                 label: 'Minimize Twitchy to System Tray',
-                checked: true,
+                checked: false,
+                enabled: false,
               },
               {
                 type: 'checkbox',
                 label: 'Enable Low-end Software Rendering Mode',
-                checked: true,
+                checked: false,
+                enabled: false,
               },
               {
                 type: 'separator',
@@ -86,18 +139,20 @@
               {
                 type: 'checkbox',
                 label: 'Enable Desktop Notifications (for Twitchy)',
-                checked: true,
+                checked: false,
+                enabled: false,
               },
               {
                 type: 'checkbox',
                 label: 'Enable all Custom Sounds (for Twitchy)',
-                checked: true,
+                checked: false,
+                enabled: false,
               },
               {
                 label: 'Set Twitch.TV Startup Page',
-                sublabel: 'https://twitch.tv',
+                sublabel: this.$db.get('settings.defaultPage').value(),
                 click: () => {
-                  // show modal
+                  this.editTwitchPagePopup = true;
                 },
               },
             ],
@@ -111,29 +166,38 @@
             submenu: [
               {
                 label: 'UBlock Origin (Adblocker)',
+                checked: false,
               },
               {
                 label: 'BetterTTV (Enhancement)',
+                checked: false,
               },
               {
                 label: 'Frankerfacez (Enhancement)',
+                checked: false,
               },
             ],
           },
           {
             label: 'Check for Updates',
+            enabled: false,
             click: () => {
             },
           },
           {
             label: 'About Twitchy',
             click: () => {
+              this.aboutModal = true;
             },
           },
         ];
       },
     },
     methods: {
+      saveChanges() {
+        this.$db.set('settings.defaultPage', this.inputValue).write();
+        this.editTwitchPagePopup = false;
+      },
       goToSettings() {
         let mainWindow = new remote.BrowserWindow({
           height: 500,
@@ -167,6 +231,14 @@
 </script>
 
 <style scoped>
+    .centered {
+        text-align: center;
+    }
+
+    .centered span {
+        width: 100%;
+    }
+
     .application .theme--dark.system-bar, .theme--dark .system-bar {
         padding: 0;
         height: 25px;

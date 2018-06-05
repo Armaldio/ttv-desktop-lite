@@ -10,6 +10,16 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
 
+"@types/lodash@*":
+  version "4.14.109"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.109.tgz#b1c4442239730bf35cabaf493c772b18c045886d"
+
+"@types/lowdb@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/lowdb/-/lowdb-1.0.2.tgz#e24d8422aed75d79cd71ef12c94fada3647d3d66"
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/node@^8.0.24":
   version "8.10.17"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.17.tgz#d48cf10f0dc6dcf59f827f5a3fc7a4a6004318d3"

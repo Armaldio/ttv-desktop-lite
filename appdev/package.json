@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "electron-is-dev": "^0.3.0",
     "lowdb": "^1.0.0",
     "material-design-icons-iconfont": "^3.0.3",
     "vue": "^2.3.3",
@@ -66,6 +67,7 @@
     "vuex": "^2.3.1"
   },
   "devDependencies": {
+    "@types/lowdb": "^1.0.2",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
