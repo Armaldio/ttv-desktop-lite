@@ -27,9 +27,8 @@
             submenu: [
               {
                 label: 'Toggle Fullscreen',
-                click: () => {
-
-                },
+                role: 'toggleFullScreen',
+                accelerator: 'F11',
               },
               {
                 type: 'separator',
@@ -37,9 +36,8 @@
               },
               {
                 label: 'Reload',
-                click: () => {
-
-                },
+                role: 'reload',
+                accelerator: 'CmdOrCtrl+R',
               },
               {
                 label: 'Back',
@@ -50,7 +48,6 @@
               {
                 label: 'Forward',
                 click: () => {
-                  this.goToSettings();
                 },
               },
             ],
@@ -73,7 +70,12 @@
                 type: 'checkbox',
                 label: 'Enable Low-end Software Rendering Mode',
                 checked: true,
-              }, {
+              },
+              {
+                type: 'separator',
+                visible: false,
+              },
+              {
                 type: 'checkbox',
                 label: 'Enable Desktop Notifications (for Twitchy)',
                 checked: true,
@@ -83,14 +85,14 @@
                 label: 'Enable all Custom Sounds (for Twitchy)',
                 checked: true,
               },
+              {
+                label: 'Set Twitch.TV Startup Page',
+                sublabel: 'https://twitch.tv',
+                click: () => {
+                  // show modal
+                },
+              },
             ],
-          },
-          {
-            type: 'separator',
-            visible: false,
-          },
-          {
-            label: 'Set Twitch.TV Startup Page',
           },
           {
             type: 'separator',
@@ -109,11 +111,6 @@
                 label: 'Frankerfacez (Enhancement)',
               },
             ],
-          },
-          {
-            label: 'Open Twitchy Log',
-            click: () => {
-            },
           },
           {
             label: 'Check for Updates',
@@ -162,13 +159,13 @@
 </script>
 
 <style scoped>
-	.application .theme--dark.system-bar, .theme--dark .system-bar {
-		padding: 0;
-		height: 25px;
-		background-color: #2c2541;
-		-webkit-app-region: drag;
+    .application .theme--dark.system-bar, .theme--dark .system-bar {
+        padding: 0;
+        height: 25px;
+        background-color: #2c2541;
+        -webkit-app-region: drag;
     }
-	
+
     @font-face {
         font-family: "Ethnocentric";
         src: url("/static/Ethnocentric.TTF");
@@ -176,9 +173,9 @@
 
     .main-title {
         font-family: Ethnocentric, Arial;
-		font-size: 12px;
+        font-size: 12px;
     }
-	
+
     .material-icons {
         -webkit-app-region: no-drag;
         -webkit-user-select: none !important;
