@@ -1,11 +1,11 @@
 <template>
-    <v-system-bar class="appbar" style="-webkit-app-region: drag; height: 25px; background-color: #2c2541;" window dark>
+    <v-system-bar window dark>
         <v-icon @click="showMenu">menu</v-icon>
-        <v-spacer style="-webkit-app-region: drag;"></v-spacer>
-        <v-toolbar-title class="main-title" style="-webkit-app-region: drag; font-size: 12px;">
+        <v-spacer></v-spacer>
+        <v-toolbar-title class="main-title">
             Twitchy Desktop Light
         </v-toolbar-title>
-        <v-spacer style="-webkit-app-region: drag;"></v-spacer>
+        <v-spacer></v-spacer>
         <v-icon @click="$electron.remote.getCurrentWindow().minimize()">remove</v-icon>
         <v-icon @click="toggleRestore">crop_square</v-icon>
         <v-icon @click="$electron.remote.app.quit()" class="close">close</v-icon>
@@ -162,19 +162,23 @@
 </script>
 
 <style scoped>
+	.application .theme--dark.system-bar, .theme--dark .system-bar {
+		padding: 0;
+		height: 25px;
+		background-color: #2c2541;
+		-webkit-app-region: drag;
+    }
+	
     @font-face {
         font-family: "Ethnocentric";
         src: url("/static/Ethnocentric.TTF");
     }
 
-    .appbar {
-        padding: 0;
-    }
-
     .main-title {
         font-family: Ethnocentric, Arial;
+		font-size: 12px;
     }
-
+	
     .material-icons {
         -webkit-app-region: no-drag;
         -webkit-user-select: none !important;
