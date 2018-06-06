@@ -284,4 +284,11 @@
     .close:hover {
         background-color: rgba(255, 0, 0, 0.75);
     }
+	
+	.application .theme--light.card, .theme--light .card {
+		border-radius: 0px;
+		background-color: #201c2b;
+		border: 1px solid #2c2541;
+		color: #dad8de;
+	}
 </style>
