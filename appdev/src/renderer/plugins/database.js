@@ -16,6 +16,7 @@ const DB = {
     const adapter = new FileSync(dbPath);
     const db = lowdb(adapter);
     db.defaults({
+      isFirstTime: true,
       settings: {
         defaultPage: 'https://twitch.tv',
       },

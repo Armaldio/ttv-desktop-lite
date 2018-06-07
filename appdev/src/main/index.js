@@ -53,6 +53,9 @@ function createWindow() {
   });
 }
 
+app.setAppUserModelId('com.armaldio.light.desktop.twitchy');
+app.setAsDefaultProtocolClient('twitchy');
+
 app.on('ready', createWindow);
 
 app.on('web-contents-created', (event, contents) => {

@@ -41,7 +41,6 @@
       ]);
 
       this.webview.addEventListener('contextmenu', (e) => {
-        console.log('context menu');
         e.preventDefault();
         menu.popup(remote.getCurrentWindow());
       }, false);

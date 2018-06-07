@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import notifier from 'node-notifier';
   import AppBar from './components/AppBar';
 
   export default {
@@ -19,17 +20,28 @@
     components: {
       AppBar,
     },
+    mounted() {
+      const isFirstTime = this.$db.get('isFirstTime').value();
+      console.log('isFirstTime', isFirstTime);
+
+      if (isFirstTime) {
+        notifier.notify({
+          title: 'Welcome To Twitchy Desktop Lite!',
+          message: 'We hope you will enjoy our app. Click the top-left menu to access many settings',
+        });
+      }
+    },
   };
 </script>
 
 <style>
     /* CSS */
-	html {
-		overflow: hidden;
-		user-select: none !important;
-		-webkit-user-select: none !important;
-	}
-	
+    html {
+        overflow: hidden;
+        user-select: none !important;
+        -webkit-user-select: none !important;
+    }
+
     #app {
         overflow: hidden;
         margin: 0;
