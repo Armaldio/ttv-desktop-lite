@@ -91,8 +91,10 @@
               },
               {
                 label: 'Reload',
-                role: 'reload',
                 accelerator: 'CmdOrCtrl+R',
+                click: () => {
+                  this.webview.reload();
+                },
               },
               {
                 label: '← Back',
@@ -284,7 +286,7 @@
     .close:hover {
         background-color: rgba(255, 0, 0, 0.75);
     }
-	
+
 	.application .theme--light.card, .theme--light .card {
 		border-radius: 0px;
 		background-color: #201c2b;
