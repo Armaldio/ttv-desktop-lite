@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-system-bar style="height: 25px;" window dark>
+        <v-system-bar v-if="!isFullScreen" style="height: 25px;" window dark>
             <v-icon @click="showMenu">menu</v-icon>
             <v-spacer></v-spacer>
             <v-toolbar-title class="main-title">
@@ -68,6 +68,8 @@
         valid: false,
 
         aboutModal: false,
+
+        isFullScreen: false,
 
         inputValue: this.$db.get('settings.defaultPage').value(),
         textRules: [
@@ -228,6 +230,19 @@
     },
     mounted() {
       this.webview = document.querySelector('#webview');
+
+      window.addEventListener('beforeunload', () => {
+        remote.getCurrentWindow().removeListener('enter-full-screen');
+        remote.getCurrentWindow().removeListener('leave-full-screen');
+      });
+
+      remote.getCurrentWindow().on('enter-full-screen', () => {
+        this.isFullScreen = true;
+      });
+
+      remote.getCurrentWindow().on('leave-full-screen', () => {
+        this.isFullScreen = false;
+      });
     },
   };
 </script>
@@ -287,10 +302,10 @@
         background-color: rgba(255, 0, 0, 0.75);
     }
 
-	.application .theme--light.card, .theme--light .card {
-		border-radius: 0px;
-		background-color: #201c2b;
-		border: 1px solid #2c2541;
-		color: #dad8de;
-	}
+    .application .theme--light.card, .theme--light .card {
+        border-radius: 0px;
+        background-color: #201c2b;
+        border: 1px solid #2c2541;
+        color: #dad8de;
+    }
 </style>
