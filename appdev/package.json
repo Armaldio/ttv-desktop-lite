@@ -19,6 +19,7 @@
   },
   "build": {
     "productName": "twitchy-desktop-lite",
+    "asar": false,
     "appId": "com.armaldio.twitchy-desktop-light",
     "directories": {
       "output": "build"
