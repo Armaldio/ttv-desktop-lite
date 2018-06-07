@@ -1,7 +1,7 @@
 <template>
     <div id="wrapper">
         <main>
-            <webview id="webview" :src="startPage" allowpopups disablewebsecurity
+            <webview id="webview" :src="startPage" webpreferences="nativeWindowOpen=true" allowpopups
                      style="display:inline-flex; width:100%; height:100vh;"></webview>
         </main>
     </div>

@@ -51,20 +51,28 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
-  mainWindow.webContents.on('new-window', (event, url) => {
-    event.preventDefault();
-    console.log('opening new window');
-    const win = new BrowserWindow({ show: true });
-    win.once('ready-to-show', () => win.show());
-    win.loadURL(url);
-    event.newGuest = win;
-  });
 }
 
 app.on('ready', createWindow);
 
+app.on('web-contents-created', (event, contents) => {
+  if (contents.getType() === 'webview') {
+    contents.on('new-window', (event, url) => {
+      event.preventDefault();
+
+      console.log('url', url);
+
+      // TODO open window with menu
+      console.log('opening new window');
+      const win = new BrowserWindow({ show: true });
+      win.once('ready-to-show', () => win.show());
+      win.loadURL(url);
+    });
+  }
+});
+
 app.on('window-all-closed', () => {
+  console.log('all windows closed!');
   if (process.platform !== 'darwin') {
     app.quit();
   }

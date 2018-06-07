@@ -9,7 +9,7 @@
             <v-spacer></v-spacer>
             <v-icon @click="$electron.remote.getCurrentWindow().minimize()">remove</v-icon>
             <v-icon @click="toggleRestore">crop_square</v-icon>
-            <v-icon @click="$electron.remote.app.quit()" class="close">close</v-icon>
+            <v-icon @click="$electron.remote.getCurrentWindow().close()" class="close">close</v-icon>
         </v-system-bar>
         <v-dialog v-model="editTwitchPagePopup" max-width="500px">
             <v-card>
