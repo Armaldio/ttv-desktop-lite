@@ -60,8 +60,6 @@ app.on('web-contents-created', (event, contents) => {
     contents.on('new-window', (event, url) => {
       event.preventDefault();
 
-      console.log('url', url);
-
       // TODO open window with menu
       console.log('opening new window');
       const win = new BrowserWindow({ show: true });
