@@ -51,4 +51,12 @@
         margin: 0;
         padding: 0;
     }
+
+    @keyframes fadein {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    #app {
+        animation: fadein 0.420s;
+    }
 </style>

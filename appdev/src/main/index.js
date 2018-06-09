@@ -23,6 +23,8 @@ function createWindow() {
     useContentSize: true,
     width: 1000,
     frame: false,
+    show: false,
+    backgroundColor: '#6441a5',
   });
 
   const extensions = [
@@ -45,6 +47,10 @@ function createWindow() {
   }
 
   mainWindow.maximize();
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
 
   mainWindow.loadURL(winURL);
 
