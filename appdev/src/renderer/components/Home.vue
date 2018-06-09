@@ -1,7 +1,7 @@
 <template>
     <div id="wrapper">
         <main>
-            <webview id="webview" :src="startPage" webpreferences="nativeWindowOpen=true" allowpopups plugins
+            <webview id="webview" :src="startPage" webpreferences="nativeWindowOpen=true" preload="../scripts/installExtensions.js" allowpopups plugins
                      style="display:inline-flex; width:100%; height:100vh;"></webview>
         </main>
     </div>

@@ -57,6 +57,6 @@
         to { opacity: 1; }
     }
     #app {
-        animation: fadein 0.420s;
+        animation: fadein 2s;
     }
 </style>
