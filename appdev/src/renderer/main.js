@@ -7,7 +7,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import App from './App';
 import router from './router';
 import store from './store';
-import db from './scripts/database';
+import db from './plugins/database';
 import theme from '../theme/theme.js';
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));

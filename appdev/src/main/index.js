@@ -1,4 +1,5 @@
 import {app, BrowserWindow} from 'electron'; // eslint-disable-line
+import fs from 'fs';
 
 /**
  * Set `__static` path to static files in production
@@ -35,8 +36,12 @@ function createWindow() {
 
   for (let i = 0; i < extensions.length; i += 1) {
     const extension = extensions[i];
-    const installed = BrowserWindow.addExtension(extension);
-    console.log('Installing ', installed);
+    if (fs.existsSync(extension)) {
+      const installed = BrowserWindow.addExtension(extension);
+      console.log('Installing ', installed);
+    } else {
+      console.log(`Missing ${extension}`);
+    }
   }
 
   mainWindow.maximize();
@@ -48,9 +53,27 @@ function createWindow() {
   });
 }
 
+app.setAppUserModelId('com.armaldio.light.desktop.twitchy');
+app.setAsDefaultProtocolClient('twitchy');
+
 app.on('ready', createWindow);
 
+app.on('web-contents-created', (event, contents) => {
+  if (contents.getType() === 'webview') {
+    contents.on('new-window', (event, url) => {
+      event.preventDefault();
+
+      // TODO open window with menu
+      console.log('opening new window');
+      const win = new BrowserWindow({ show: true });
+      win.once('ready-to-show', () => win.show());
+      win.loadURL(url);
+    });
+  }
+});
+
 app.on('window-all-closed', () => {
+  console.log('all windows closed!');
   if (process.platform !== 'darwin') {
     app.quit();
   }
