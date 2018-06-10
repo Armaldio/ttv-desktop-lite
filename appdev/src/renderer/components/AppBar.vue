@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-system-bar v-if="!isFullScreen" style="height: 25px;" window dark>
+        <v-system-bar v-if="!isFullScreen" style="height: 28px;" window dark>
             <v-icon @click="showMenu">menu</v-icon>
             <v-spacer></v-spacer>
             <v-toolbar-title class="main-title">
@@ -126,13 +126,7 @@
               },
               {
                 type: 'checkbox',
-                label: 'Minimize Twitchy to System Tray',
-                checked: false,
-                enabled: false,
-              },
-              {
-                type: 'checkbox',
-                label: 'Enable Low-end Software Rendering Mode',
+                label: 'Enable Low-End Software Rendering Mode',
                 checked: false,
                 enabled: false,
               },
@@ -169,7 +163,7 @@
             label: 'Extensions',
             submenu: [
               {
-                label: 'UBlock Origin (Adblocker)',
+                label: 'Disconnect (Adblock/Performance)',
                 checked: false,
               },
               {
@@ -261,6 +255,7 @@
         height: 25px;
         background-color: #2c2541;
         -webkit-app-region: drag;
+		border-bottom: 1px solid #3d384b;
     }
 
     @font-face {
@@ -278,7 +273,7 @@
         -webkit-user-select: none !important;
         transition: none;
         cursor: pointer;
-        height: 25px;
+        height: 27px;
         padding-top: 3px;
         padding-left: 10px;
         padding-right: 10px;
