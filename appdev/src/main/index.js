@@ -23,7 +23,7 @@ function createWindow() {
     width: 1000,
     frame: false,
     show: false,
-    backgroundColor: '#6441a5',
+    backgroundColor: '#17141f',
   });
 
   mainWindow.maximize();
