@@ -1,14 +1,22 @@
 <template>
     <div id="wrapper">
+        <rotate-square class="loader"></rotate-square>
     </div>
 </template>
 
 <script>
-  import { download as crxDownload } from 'download-crx';
+  /* eslint-disable no-await-in-loop */
+  import { downloadById as crxDownload } from 'download-crx';
   import crxUnzip from 'unzip-crx';
+
   import path from 'path';
   import mkdirp from 'mkdirp';
   import unhandled from 'electron-unhandled';
+
+  import { RotateSquare } from 'vue-loading-spinner';
+
+  import config from '../../config';
+
   import AppBar from './AppBar';
 
   unhandled();
@@ -17,6 +25,8 @@
     name: 'setup',
     components: {
       AppBar,
+
+      RotateSquare,
     },
     data() {
       return {
@@ -34,18 +44,35 @@
       },
       async downloadExtensions() {
         try {
-          await this.createDirs(this.crxLocation);
+          const { extensions } = config;
 
-          console.log('Downloading to :', this.crxLocation);
-          const bttvLocation = await crxDownload('https://chrome.google.com/webstore/detail/betterttv/ajopnjidmegmdimjlfnijceegpefgped', this.crxLocation, 'bttv');
-          const installLocation = path.join(path.dirname(bttvLocation), 'extensions', 'bttv');
-          console.log('installLocation', installLocation);
-          const bttvLocationExtracted = await crxUnzip(bttvLocation, installLocation);
-          console.log(bttvLocationExtracted);
-          console.log('bttv location', bttvLocation);
+          for (let i = 0; i < extensions.length; i += 1) {
+            const extensionId = extensions[i];
+            await this.createDirs(this.crxLocation);
+
+            console.log('Downloading to :', this.crxLocation);
+            const crxLocationDownloaded = await crxDownload(
+              extensionId,
+              this.crxLocation,
+              extensionId,
+            );
+            const installLocation = path.join(
+              path.dirname(crxLocationDownloaded),
+              'extensions',
+              extensionId,
+            );
+            console.log('installLocation', installLocation);
+            const crxLocationDownloadedExtracted = await crxUnzip(
+              crxLocationDownloaded,
+              installLocation,
+            );
+            console.log(crxLocationDownloadedExtracted);
+            console.log('location', crxLocationDownloaded);
+          }
         } catch (e) {
           console.log(e);
         }
+        this.$router.push('/home');
       },
     },
     mounted() {
@@ -64,7 +91,12 @@
         height: 100%;
     }
 
+    .loader {
+        background-color: #5a3b92 ;
+    }
+
     #wrapper {
         width: 100%;
+        text-align: center;
     }
 </style>

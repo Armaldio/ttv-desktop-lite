@@ -1,5 +1,4 @@
 import {app, BrowserWindow} from 'electron'; // eslint-disable-line
-import fs from 'fs';
 
 /**
  * Set `__static` path to static files in production
@@ -26,25 +25,6 @@ function createWindow() {
     show: false,
     backgroundColor: '#6441a5',
   });
-
-  const extensions = [
-    './src/extensions/bttv',
-    './src/extensions/ublock',
-    './src/extensions/frankerfacez',
-  ];
-
-  const installedExtensions = BrowserWindow.getExtensions();
-  console.log(installedExtensions);
-
-  for (let i = 0; i < extensions.length; i += 1) {
-    const extension = extensions[i];
-    if (fs.existsSync(extension)) {
-      const installed = BrowserWindow.addExtension(extension);
-      console.log('Installing ', installed);
-    } else {
-      console.log(`Missing ${extension}`);
-    }
-  }
 
   mainWindow.maximize();
 
