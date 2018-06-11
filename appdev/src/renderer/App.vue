@@ -27,7 +27,7 @@
       if (isFirstTime) {
         notifier.notify({
           title: 'Welcome To Twitchy Desktop Lite',
-          message: 'Thanks for using our desktop app! You can customize your experience by clicking the Settings icon in the top-right.',
+          message: 'Thanks for using our desktop app! You can customize your experience by clicking the Settings icon in the top-left.',
         });
       }
     },

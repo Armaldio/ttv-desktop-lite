@@ -1,6 +1,10 @@
 <template>
     <div id="wrapper">
-        <rotate-square class="loader"></rotate-square>
+        <SyncLoader color="#5a3b92"></SyncLoader>
+        <v-progress-linear class="progress" v-model="progress" height="5" color="primary darken-1"></v-progress-linear>
+        <!--<div class="text pt-4">
+            <span>{{ current }} / {{ total }}</span>
+        </div>-->
     </div>
 </template>
 
@@ -11,26 +15,24 @@
 
   import path from 'path';
   import mkdirp from 'mkdirp';
-  import unhandled from 'electron-unhandled';
 
-  import { RotateSquare } from 'vue-loading-spinner';
+  import SyncLoader from 'vue-spinner/src/SyncLoader';
 
   import config from '../../config';
 
   import AppBar from './AppBar';
-
-  unhandled();
 
   export default {
     name: 'setup',
     components: {
       AppBar,
 
-      RotateSquare,
+      SyncLoader,
     },
     data() {
       return {
         crxLocation: path.join(this.$electron.remote.app.getPath('userData'), 'extensions', 'crx'),
+        progress: 0,
       };
     },
     methods: {
@@ -42,15 +44,22 @@
           });
         });
       },
+      async sleep(time) {
+        return new Promise(resolve => setTimeout(resolve, time));
+      },
       async downloadExtensions() {
+        await this.sleep(1000);
         try {
           const { extensions } = config;
 
+          this.total = extensions.length;
+
           for (let i = 0; i < extensions.length; i += 1) {
+            this.progress = ((i + 1) / (extensions.length)) * 100;
+
             const extensionId = extensions[i];
             await this.createDirs(this.crxLocation);
 
-            console.log('Downloading to :', this.crxLocation);
             const crxLocationDownloaded = await crxDownload(
               extensionId,
               this.crxLocation,
@@ -61,13 +70,12 @@
               'extensions',
               extensionId,
             );
-            console.log('installLocation', installLocation);
-            const crxLocationDownloadedExtracted = await crxUnzip(
+            console.log('Extracting to', installLocation);
+            await crxUnzip(
               crxLocationDownloaded,
               installLocation,
             );
-            console.log(crxLocationDownloadedExtracted);
-            console.log('location', crxLocationDownloaded);
+            await this.sleep(1000);
           }
         } catch (e) {
           console.log(e);
@@ -91,8 +99,13 @@
         height: 100%;
     }
 
-    .loader {
-        background-color: #5a3b92 ;
+    .progress {
+        position: absolute;
+        bottom: -15px;
+    }
+
+    .text {
+        color: #442566;
     }
 
     #wrapper {
