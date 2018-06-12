@@ -28,7 +28,6 @@ install:
 
 build_script:
   - pwd
-  - cd appdev
   - yarn build
 
 test: off
