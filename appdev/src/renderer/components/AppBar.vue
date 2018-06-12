@@ -196,20 +196,6 @@
         this.$db.set('settings.defaultPage', this.inputValue).write();
         this.editTwitchPagePopup = false;
       },
-      goToSettings() {
-        let mainWindow = new remote.BrowserWindow({
-          height: 500,
-          width: 500,
-        });
-        const winURL = process.env.NODE_ENV === 'development'
-          ? 'http://localhost:9080'
-          : `file://${__dirname}/index.html`;
-        mainWindow.loadURL(`${winURL}/settings`);
-
-        mainWindow.on('closed', () => {
-          mainWindow = null;
-        });
-      },
       toggleRestore() {
         if (this.$electron.remote.getCurrentWindow().isMaximized()) {
           this.$electron.remote.getCurrentWindow().unmaximize();
