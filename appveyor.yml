@@ -1,8 +1,8 @@
 version: 0.1.{build}
 
-branches:
-  only:
-    - master
+# branches:
+#   only:
+#     - master
 
 image: Visual Studio 2017
 platform:
@@ -21,10 +21,14 @@ install:
   - ps: Install-Product node 8 x64
   - choco install yarn --ignore-dependencies
   - git reset --hard HEAD
+  - pwd
+  - cd appdev
   - yarn
   - node --version
 
 build_script:
+  - pwd
+  - cd appdev
   - yarn build
 
 test: off
