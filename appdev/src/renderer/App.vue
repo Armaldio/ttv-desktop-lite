@@ -53,10 +53,10 @@
     }
 
     @keyframes fadein {
-        from { opacity: 0.25; }
+        from { opacity: 0; }
         to { opacity: 1; }
     }
     #app {
-        animation: fadein 0.5s;
+        animation: fadein 0.25s;
     }
 </style>
