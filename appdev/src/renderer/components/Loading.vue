@@ -5,6 +5,7 @@
         <!--<div class="text pt-4">
             <span>{{ current }} / {{ total }}</span>
         </div>-->
+		<v-card-text class="progresstext">Performing first time setup, please wait!</v-card-text>
     </div>
 </template>
 
@@ -90,8 +91,15 @@
 </script>
 
 <style scoped>
+    @font-face {
+        font-family: "Ethnocentric";
+        src: url("/static/Ethnocentric.TTF");
+    }
+	
     html {
         overflow: hidden;
+        background-color: #17141f !important;
+        border-color: #17141f !important;
     }
 
     main {
@@ -101,7 +109,7 @@
 
     .progress {
         position: absolute;
-        bottom: -15px;
+        bottom: -14px;
     }
 
     .text {
@@ -111,5 +119,12 @@
     #wrapper {
         width: 100%;
         text-align: center;
+    }
+	
+	.progresstext {
+        margin-top: 10px;
+        color: rgba(150, 150, 150, 1.0);
+        text-align: center;
+        font-family: Ethnocentric, Arial;
     }
 </style>

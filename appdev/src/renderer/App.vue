@@ -3,7 +3,7 @@
         <v-app>
             <AppBar></AppBar>
             <v-content class="primary">
-                <v-container fluid fill-height>
+                <v-container fluid fill-height style="background-color: #17141f !important; border-color: #17141f !important;">
                     <router-view></router-view>
                 </v-container>
             </v-content>
@@ -53,7 +53,7 @@
     }
 
     @keyframes fadein {
-        from { opacity: 0; }
+        from { opacity: 0.25; }
         to { opacity: 1; }
     }
     #app {
