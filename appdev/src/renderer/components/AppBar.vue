@@ -13,8 +13,8 @@
         </v-system-bar>
         <v-dialog v-model="editTwitchPagePopup" max-width="500px">
             <v-card>
-                <v-card-title>
-                    <span>Set Twitch.TV Startup Page</span>
+                <v-card-title class="abouttitle">
+                    <span>Twitch.TV Startup Page</span>
                 </v-card-title>
                 <v-card-text>
                     <v-form v-model="valid">
@@ -34,14 +34,10 @@
         </v-dialog>
         <v-dialog v-model="aboutModal" max-width="500px">
             <v-card>
-                <v-card-title class="centered">
-                    <span>About Twitchy Desktop Light</span>
-                </v-card-title>
-                <v-card-text>
-                    <img class="centered" width="100" src="/static/twitchy_icon.png" alt="">
-                    <p>Twitchy Desktop Light</p>
-                    <p>xxxxx</p>
-                    <p>Desing this window as you want (withing <b>v-card-text</b>)</p>
+                <v-card-title class="abouttitle">About</v-card-title>
+                <v-card-text class="abouttext">
+                    <img width="150" src="/static/twitchy_icon.png" alt="">
+                    <p class="aboutheadline">Twitchy Desktop Lite<br><span style="font-size:10px;">Version: <b>###versionnumber###</b></span></p>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -228,12 +224,22 @@
 </script>
 
 <style scoped>
-    .centered {
-        text-align: center;
-    }
+    .abouttitle {
+		font-family: Ethnocentric, Arial;
+		border-bottom: 1px solid #3d384b;
+		background-color: #2c2541
+	}
 
-    .centered span {
+	.aboutheadline {
+		font-family: Ethnocentric, Arial;
+		font-size:20px;
+		margin-top:15px;	
+	}
+	
+    .abouttext {
+        padding: 16px;
         width: 100%;
+        text-align: center;
     }
 
     .application .theme--dark.system-bar, .theme--dark .system-bar {
