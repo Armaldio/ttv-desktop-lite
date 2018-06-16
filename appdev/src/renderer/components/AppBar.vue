@@ -206,6 +206,7 @@
     },
     mounted() {
       this.webview = document.querySelector('#webview');
+      console.log('webview loaded');
 
       window.addEventListener('beforeunload', () => {
         remote.getCurrentWindow().removeListener('enter-full-screen');
