@@ -1,11 +1,12 @@
 import {app, BrowserWindow} from 'electron'; // eslint-disable-line
+import path from 'path';
 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\'); // eslint-disable-line
+  global.__static = path.join(__dirname, '/static').replace(/\\/g, '\\\\'); // eslint-disable-line
 }
 
 let mainWindow;
@@ -24,6 +25,7 @@ function createWindow() {
     frame: false,
     show: false,
     backgroundColor: '#17141f',
+    icon: path.join(__static, 'twitchy_icon.png'),
   });
 
   mainWindow.maximize();
