@@ -11,7 +11,7 @@ thumbs.db
 .idea/**
 src/extensions/**
 .idea/
-appdev/package-lock.json
+package-lock.json
 
-appdev/settings\.json
+settings.json
 
