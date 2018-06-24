@@ -81,7 +81,6 @@
             submenu: [
               {
                 label: 'Toggle Fullscreen',
-                role: 'toggleFullScreen',
                 accelerator: 'F11',
               },
               {
@@ -156,12 +155,10 @@
             submenu: [
               {
                 label: 'Streamer Layout (Example)',
-                role: 'layoutexample1',
                 enabled: false,
               },
               {
                 label: 'Viewer Layout (Example)',
-                role: 'layoutexample2',
                 enabled: false,
               },
               {
@@ -170,17 +167,14 @@
               },
               {
                 label: 'Create New Layout',
-                role: 'layoutcreate',
                 enabled: false,
               },
               {
                 label: 'Replace Layout',
-                role: 'layoutreplace',
                 enabled: false,
               },
               {
                 label: 'Delete Layout',
-                role: 'layoutdelete',
                 enabled: false,
               },
               {
@@ -189,22 +183,18 @@
               },
               {
                 label: 'Save All Layouts To File',
-                role: 'layoutsaveall',
                 enabled: false,
               },
               {
                 label: 'Save Layout To File',
-                role: 'layoutsave',
                 enabled: false,
               },
               {
                 label: 'Load Layout File',
-                role: 'layoutdload',
                 enabled: false,
               },
               {
                 label: 'Load Layout Package',
-                role: 'layoutloadpack',
                 enabled: false,
               },
             ],
@@ -243,7 +233,6 @@
             submenu: [
               {
                 label: 'Purge Memory (RAM)',
-                role: 'collectmemory',
                 enabled: false,
               },
               {
@@ -257,7 +246,6 @@
               },
               {
                 label: 'Clear Cache and Restart',
-                role: 'fullreset',
                 enabled: false,
               },
             ],
@@ -268,7 +256,6 @@
           },
           {
             label: 'Check for Updates',
-            role: 'checkupdate',
             enabled: false,
           },
           {
@@ -327,9 +314,9 @@
 	.aboutheadline {
 		font-family: Ethnocentric, Arial;
 		font-size:20px;
-		margin-top:15px;	
+		margin-top:15px;
 	}
-	
+
     .abouttext {
         padding: 16px;
         width: 100%;
