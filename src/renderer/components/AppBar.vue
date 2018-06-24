@@ -77,6 +77,7 @@
       menu() {
         return [
           {
+            label: 'Page',
             submenu: [
               {
                 label: 'Toggle Fullscreen',
@@ -109,7 +110,6 @@
                 },
               },
             ],
-            label: 'Page',
           },
           {
             label: 'Preferences',
@@ -122,7 +122,7 @@
               },
               {
                 type: 'checkbox',
-                label: 'Enable Low-End Software Rendering Mode',
+                label: 'Enable Software Rendering Mode',
                 checked: false,
                 enabled: false,
               },
@@ -132,13 +132,13 @@
               },
               {
                 type: 'checkbox',
-                label: 'Enable Desktop Notifications (for Twitchy)',
+                label: 'Enable Notifications (for Twitchy)',
                 checked: false,
                 enabled: false,
               },
               {
                 type: 'checkbox',
-                label: 'Enable all Custom Sounds (for Twitchy)',
+                label: 'Enable Custom Sounds (for Twitchy)',
                 checked: false,
                 enabled: false,
               },
@@ -152,6 +152,64 @@
             ],
           },
           {
+            label: 'Layout',
+            submenu: [
+              {
+                label: 'Streamer Layout (Example)',
+                role: 'layoutexample1',
+                enabled: false,
+              },
+              {
+                label: 'Viewer Layout (Example)',
+                role: 'layoutexample2',
+                enabled: false,
+              },
+              {
+                type: 'separator',
+                visible: false,
+              },
+              {
+                label: 'Create New Layout',
+                role: 'layoutcreate',
+                enabled: false,
+              },
+              {
+                label: 'Replace Layout',
+                role: 'layoutreplace',
+                enabled: false,
+              },
+              {
+                label: 'Delete Layout',
+                role: 'layoutdelete',
+                enabled: false,
+              },
+              {
+                type: 'separator',
+                visible: false,
+              },
+              {
+                label: 'Save All Layouts To File',
+                role: 'layoutsaveall',
+                enabled: false,
+              },
+              {
+                label: 'Save Layout To File',
+                role: 'layoutsave',
+                enabled: false,
+              },
+              {
+                label: 'Load Layout File',
+                role: 'layoutdload',
+                enabled: false,
+              },
+              {
+                label: 'Load Layout Package',
+                role: 'layoutloadpack',
+                enabled: false,
+              },
+            ],
+          },
+          {
             type: 'separator',
             visible: false,
           },
@@ -159,24 +217,59 @@
             label: 'Extensions',
             submenu: [
               {
-                label: 'Disconnect (Adblock/Performance)',
+                label: 'Twitchyblock (Adblock)',
                 checked: false,
+                sublabel: 'Status: Up To Date',
+              },
+              {
+                label: 'Disconnect (Performance)',
+                checked: false,
+                sublabel: 'Status: Up To Date',
               },
               {
                 label: 'BetterTTV (Enhancement)',
                 checked: false,
+                sublabel: 'Status: Up To Date',
               },
               {
                 label: 'Frankerfacez (Enhancement)',
                 checked: false,
+                sublabel: 'Status: Up To Date',
               },
             ],
           },
           {
+            label: 'Advanced',
+            submenu: [
+              {
+                label: 'Purge Memory (RAM)',
+                role: 'collectmemory',
+                enabled: false,
+              },
+              {
+                label: 'Set Automatic Memory Purge',
+                sublabel: 'Every 0 minutes',
+                enabled: false,
+              },
+              {
+                type: 'separator',
+                visible: false,
+              },
+              {
+                label: 'Clear Cache and Restart',
+                role: 'fullreset',
+                enabled: false,
+              },
+            ],
+          },
+          {
+            type: 'separator',
+            visible: false,
+          },
+          {
             label: 'Check for Updates',
+            role: 'checkupdate',
             enabled: false,
-            click: () => {
-            },
           },
           {
             label: 'About Twitchy',
