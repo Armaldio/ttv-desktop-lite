@@ -218,23 +218,23 @@
             submenu: [
               {
                 label: 'Twitchyblock (Adblock)',
-                checked: false,
                 sublabel: 'Status: Up To Date',
+                checked: true,
               },
               {
                 label: 'Disconnect (Performance)',
-                checked: false,
                 sublabel: 'Status: Up To Date',
+                checked: true,
               },
               {
                 label: 'BetterTTV (Enhancement)',
-                checked: false,
                 sublabel: 'Status: Up To Date',
+                checked: true,
               },
               {
                 label: 'Frankerfacez (Enhancement)',
-                checked: false,
                 sublabel: 'Status: Up To Date',
+                checked: true,
               },
             ],
           },
