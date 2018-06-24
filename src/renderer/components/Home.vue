@@ -59,21 +59,24 @@
       const crxLocation =
               path.join(this.$electron.remote.app.getPath('userData'), 'extensions', 'crx');
 
-      const installedExtensions = BrowserWindow.getExtensions();
+      let installedExtensions = BrowserWindow.getExtensions();
       console.log('Installed extensions: ', installedExtensions);
 
       for (let i = 0; i < extensions.length; i += 1) {
         const extension = extensions[i];
         const extensionPath = path.join(crxLocation, 'extensions', extension);
         if (fs.existsSync(extensionPath)) {
-          const remove = BrowserWindow.removeExtension(extensionPath);
-          console.log('Removing ', remove);
+          /* const remove = BrowserWindow.removeExtension(extensionPath);
+          console.log('Removing ', remove); */
           const installed = BrowserWindow.addExtension(extensionPath);
           console.log('Installing ', installed);
         } else {
           console.log(`Missing ${extensionPath}`);
         }
       }
+
+      installedExtensions = BrowserWindow.getExtensions();
+      console.log('Installed extensions: ', installedExtensions);
     },
   };
 </script>

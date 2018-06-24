@@ -37,7 +37,8 @@
                 <v-card-title class="abouttitle">About</v-card-title>
                 <v-card-text class="abouttext">
                     <img width="150" src="/static/twitchy_icon.png" alt="">
-                    <p class="aboutheadline">Twitchy Desktop Lite<br><span style="font-size:10px;">Version: <b>###versionnumber###</b></span></p>
+                    <p class="aboutheadline">Twitchy Desktop Lite<br><span style="font-size:10px;">Version: <b>###versionnumber###</b></span>
+                    </p>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -269,6 +270,7 @@
     },
     methods: {
       saveChanges() {
+        // TODO https://github.com/pubkey/rxdb
         this.$db.set('settings.defaultPage', this.inputValue).write();
         this.editTwitchPagePopup = false;
       },
@@ -285,8 +287,9 @@
       },
     },
     mounted() {
+      // TODO the webview is not loaded on start, should wait until it is
       this.webview = document.querySelector('#webview');
-      console.log('webview loaded');
+      console.log('webview loaded', this.webview);
 
       window.addEventListener('beforeunload', () => {
         remote.getCurrentWindow().removeListener('enter-full-screen');
@@ -300,22 +303,29 @@
       remote.getCurrentWindow().on('leave-full-screen', () => {
         this.isFullScreen = false;
       });
+
+      remote.getCurrentWindow().webContents.on('before-input-event', (event, input) => {
+        if (input.control && input.key === 'r') {
+          event.stopPropagation();
+          event.preventDefault();
+        }
+      });
     },
   };
 </script>
 
 <style scoped>
     .abouttitle {
-		font-family: Ethnocentric, Arial;
-		border-bottom: 1px solid #3d384b;
-		background-color: #2c2541
-	}
+        font-family: Ethnocentric, Arial;
+        border-bottom: 1px solid #3d384b;
+        background-color: #2c2541
+    }
 
-	.aboutheadline {
-		font-family: Ethnocentric, Arial;
-		font-size:20px;
-		margin-top:15px;
-	}
+    .aboutheadline {
+        font-family: Ethnocentric, Arial;
+        font-size: 20px;
+        margin-top: 15px;
+    }
 
     .abouttext {
         padding: 16px;
@@ -328,7 +338,7 @@
         height: 25px;
         background-color: #2c2541;
         -webkit-app-region: drag;
-		border-bottom: 1px solid #3d384b;
+        border-bottom: 1px solid #3d384b;
     }
 
     @font-face {
