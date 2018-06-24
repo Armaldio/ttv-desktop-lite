@@ -48,7 +48,7 @@
 
       this.webview.addEventListener('contextmenu', (e) => {
         e.preventDefault();
-        menu.popup(remote.getCurrentWindow());
+        menu.popup(this.$electron.remote.getCurrentWindow());
       }, false);
 
       /**
@@ -56,15 +56,18 @@
        */
       const { extensions } = config;
 
-      const crxLocation = path.join(this.$electron.remote.app.getPath('userData'), 'extensions', 'crx');
+      const crxLocation =
+              path.join(this.$electron.remote.app.getPath('userData'), 'extensions', 'crx');
 
       const installedExtensions = BrowserWindow.getExtensions();
-      console.log(installedExtensions);
+      console.log('Installed extensions: ', installedExtensions);
 
       for (let i = 0; i < extensions.length; i += 1) {
         const extension = extensions[i];
         const extensionPath = path.join(crxLocation, 'extensions', extension);
         if (fs.existsSync(extensionPath)) {
+          const remove = BrowserWindow.removeExtension(extensionPath);
+          console.log('Removing ', remove);
           const installed = BrowserWindow.addExtension(extensionPath);
           console.log('Installing ', installed);
         } else {
