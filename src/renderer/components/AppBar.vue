@@ -4,7 +4,7 @@
             <v-icon @click="showMenu">menu</v-icon>
             <v-spacer></v-spacer>
             <v-toolbar-title class="main-title">
-                Twitchy Desktop Light
+                TTV Desktop Lite
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-icon @click="$electron.remote.getCurrentWindow().minimize()">remove</v-icon>
@@ -36,8 +36,8 @@
             <v-card>
                 <v-card-title class="abouttitle">About</v-card-title>
                 <v-card-text class="abouttext">
-                    <img width="150" src="/static/twitchy_icon.png" alt="">
-                    <p class="aboutheadline">Twitchy Desktop Lite<br><span style="font-size:10px;">Version: <b>###versionnumber###</b></span>
+                    <img width="150" src="/static/TTVDesktopLite_icon.png" alt="">
+                    <p class="aboutheadline">TTV Desktop Lite<br><span style="font-size:10px;">Version: <b>###versionnumber###</b></span>
                     </p>
                 </v-card-text>
                 <v-card-actions>
@@ -116,7 +116,7 @@
             submenu: [
               {
                 type: 'checkbox',
-                label: 'Run Twitchy when my Computer starts',
+                label: 'Run TTV Desktop Lite when my Computer starts',
                 checked: false,
                 enabled: false,
               },
@@ -132,13 +132,13 @@
               },
               {
                 type: 'checkbox',
-                label: 'Enable Notifications (for Twitchy)',
+                label: 'Enable Notifications (for TTV Desktop Lite)',
                 checked: false,
                 enabled: false,
               },
               {
                 type: 'checkbox',
-                label: 'Enable Custom Sounds (for Twitchy)',
+                label: 'Enable Custom Sounds (for TTV Desktop Lite)',
                 checked: false,
                 enabled: false,
               },
@@ -208,7 +208,7 @@
             label: 'Extensions',
             submenu: [
               {
-                label: 'Twitchyblock (Adblock)',
+                label: 'TTVblock (Adblock)',
                 sublabel: 'Status: Up To Date',
                 checked: true,
               },
@@ -260,7 +260,7 @@
             enabled: false,
           },
           {
-            label: 'About Twitchy',
+            label: 'About TTV Desktop Lite',
             click: () => {
               this.aboutModal = true;
             },
