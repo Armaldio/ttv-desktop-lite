@@ -37,7 +37,7 @@
                 <v-card-title class="abouttitle">About</v-card-title>
                 <v-card-text class="abouttext">
                     <img width="150" src="/static/TTVDesktopLite_icon.png" alt="">
-                    <p class="aboutheadline">TTV Desktop Lite<br><span style="font-size:10px;">Version: <b>###versionnumber###</b></span>
+                    <p class="aboutheadline">TTV Desktop Lite<br><span style="font-size:10px;">Version: <b>{{ pkg.version }}</b></span>
                     </p>
                 </v-card-text>
                 <v-card-actions>
@@ -52,6 +52,7 @@
 <script>
   // eslint-disable-next-line import/no-extraneous-dependencies
   import { remote } from 'electron';
+  import pkg from '../../../package';
 
   const { Menu } = remote;
 
@@ -59,6 +60,7 @@
     name: 'AppBar',
     data() {
       return {
+        pkg,
         webview: null,
         editTwitchPagePopup: false,
 
@@ -287,28 +289,29 @@
       },
     },
     mounted() {
-      // TODO the webview is not loaded on start, should wait until it is
-      this.webview = document.querySelector('#webview');
-      console.log('webview loaded', this.webview);
+      this.$electron.remote.getCurrentWindow().webContents.on('did-attach-webview', () => {
+        this.webview = document.querySelector('#webview');
+        console.log('webview loaded', this.webview);
 
-      window.addEventListener('beforeunload', () => {
-        remote.getCurrentWindow().removeListener('enter-full-screen');
-        remote.getCurrentWindow().removeListener('leave-full-screen');
-      });
+        window.addEventListener('beforeunload', () => {
+          this.$electron.remote.getCurrentWindow().removeListener('enter-full-screen');
+          this.$electron.remote.getCurrentWindow().removeListener('leave-full-screen');
+        });
 
-      remote.getCurrentWindow().on('enter-full-screen', () => {
-        this.isFullScreen = true;
-      });
+        this.$electron.remote.getCurrentWindow().on('enter-full-screen', () => {
+          this.isFullScreen = true;
+        });
 
-      remote.getCurrentWindow().on('leave-full-screen', () => {
-        this.isFullScreen = false;
-      });
+        this.$electron.remote.getCurrentWindow().on('leave-full-screen', () => {
+          this.isFullScreen = false;
+        });
 
-      remote.getCurrentWindow().webContents.on('before-input-event', (event, input) => {
-        if (input.control && input.key === 'r') {
-          event.stopPropagation();
-          event.preventDefault();
-        }
+        this.$electron.remote.getCurrentWindow().webContents.on('before-input-event', (event, input) => {
+          if (input.control && input.key === 'r') {
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        });
       });
     },
   };

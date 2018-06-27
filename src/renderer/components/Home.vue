@@ -33,50 +33,53 @@
       };
     },
     mounted() {
-      this.webview = document.querySelector('#webview');
+      this.$electron.remote.getCurrentWindow().webContents.on('did-attach-webview', () => {
+        this.webview = document.querySelector('#webview');
 
-      const menu = Menu.buildFromTemplate([
-        { role: 'undo' },
-        { role: 'redo' },
-        { type: 'separator' },
-        { role: 'cut' },
-        { role: 'copy' },
-        { role: 'paste' },
-        { type: 'separator' },
-        { role: 'selectall' },
-      ]);
+        const menu = Menu.buildFromTemplate([
+          { role: 'undo' },
+          { role: 'redo' },
+          { type: 'separator' },
+          { role: 'cut' },
+          { role: 'copy' },
+          { role: 'paste' },
+          { type: 'separator' },
+          { role: 'selectall' },
+        ]);
 
-      this.webview.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        menu.popup(this.$electron.remote.getCurrentWindow());
-      }, false);
+        this.webview.addEventListener('contextmenu', (e) => {
+          e.preventDefault();
+          menu.popup(this.$electron.remote.getCurrentWindow());
+        }, false);
 
-      /**
-       * Install extensions
-       */
-      const { extensions } = config;
+        /**
+         * Install extensions
+         */
+        const { extensions } = config;
 
-      const crxLocation =
-              path.join(this.$electron.remote.app.getPath('userData'), 'extensions', 'crx');
+        const crxLocation =
+                path.join(this.$electron.remote.app.getPath('userData'), 'extensions', 'crx');
 
-      let installedExtensions = BrowserWindow.getExtensions();
-      console.log('Installed extensions: ', installedExtensions);
+        let installedExtensions = BrowserWindow.getExtensions();
+        console.log('Installed extensions: ', installedExtensions);
 
-      for (let i = 0; i < extensions.length; i += 1) {
-        const extension = extensions[i];
-        const extensionPath = path.join(crxLocation, 'extensions', extension);
-        if (fs.existsSync(extensionPath)) {
-          /* const remove = BrowserWindow.removeExtension(extensionPath);
+        for (let i = 0; i < extensions.length; i += 1) {
+          const extension = extensions[i];
+          const extensionPath = path.join(crxLocation, 'extensions', extension);
+          if (fs.existsSync(extensionPath)) {
+            /* const remove = BrowserWindow.removeExtension(extensionPath);
           console.log('Removing ', remove); */
-          const installed = BrowserWindow.addExtension(extensionPath);
-          console.log('Installing ', installed);
-        } else {
-          console.log(`Missing ${extensionPath}`);
-        }
-      }
 
-      installedExtensions = BrowserWindow.getExtensions();
-      console.log('Installed extensions: ', installedExtensions);
+            /* const installed = BrowserWindow.addExtension(extensionPath);
+          console.log('Installing ', installed); */
+          } else {
+            console.log(`Missing ${extensionPath}`);
+          }
+        }
+
+        installedExtensions = BrowserWindow.getExtensions();
+        console.log('Installed extensions: ', installedExtensions);
+      });
     },
   };
 </script>

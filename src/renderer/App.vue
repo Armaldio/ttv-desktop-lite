@@ -28,7 +28,7 @@
         this.$db.set('isFirstTime', false).write();
 
         notifier.notify({
-          title: 'Welcome To Twitchy Desktop Lite',
+          title: 'Welcome To TTV Desktop Lite',
           message: 'Thanks for using our desktop app! You can customize your experience by clicking the Settings icon in the top-left.',
         });
       }
