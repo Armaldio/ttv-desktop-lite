@@ -61,6 +61,7 @@
     data() {
       return {
         pkg,
+        zoomLevel: 0,
         webview: null,
         editTwitchPagePopup: false,
 
@@ -109,6 +110,28 @@
                 enabled: this.webview.canGoForward(),
                 click: () => {
                   this.webview.goForward();
+                },
+              },
+              {
+                type: 'separator',
+                visible: false,
+              },
+              {
+                label: 'Zoom In',
+                click: () => {
+                  this.zoomLevel += 1;
+                },
+              },
+              {
+                label: 'Zoom Out',
+                click: () => {
+                  this.zoomLevel -= 1;
+                },
+              },
+              {
+                label: 'Reset zoom',
+                click: () => {
+                  this.zoomLevel = 0;
                 },
               },
             ],
@@ -268,6 +291,11 @@
             },
           },
         ];
+      },
+    },
+    watch: {
+      zoomLevel(newLevel) {
+        this.webview.setZoomLevel(newLevel);
       },
     },
     methods: {
