@@ -92,7 +92,7 @@
                 visible: false,
               },
               {
-                label: 'Reload',
+                label: '↻ Reload',
                 accelerator: 'CmdOrCtrl+R',
                 click: () => {
                   this.webview.reload();
@@ -117,19 +117,20 @@
                 visible: false,
               },
               {
-                label: 'Zoom In',
+                label: '+ Zoom In',
                 click: () => {
                   this.zoomLevel += 1;
                 },
               },
               {
-                label: 'Zoom Out',
+                label: '− Zoom Out',
                 click: () => {
                   this.zoomLevel -= 1;
                 },
               },
               {
-                label: 'Reset zoom',
+                label: 'Reset Zoom To 100%',
+                sublabel: 'Current Zoom: ###curlevel###%',
                 click: () => {
                   this.zoomLevel = 0;
                 },
@@ -232,6 +233,14 @@
           {
             label: 'Extensions',
             submenu: [
+              {
+                label: '↓ Update/Install Extensions And Restart',
+                enabled: false,
+              },
+              {
+                type: 'separator',
+                visible: false,
+              },
               {
                 label: 'TTVblock (Adblock)',
                 sublabel: 'Status: Up To Date',
