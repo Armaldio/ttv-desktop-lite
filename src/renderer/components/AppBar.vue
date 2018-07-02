@@ -16,7 +16,7 @@
                 <v-card-title class="abouttitle">
                     <span>Twitch.TV Startup Page</span>
                 </v-card-title>
-				<v-card-text style="padding-bottom: 0px;">Enter Twitch.Tv Startup Page:</v-card-text>
+                <v-card-text style="padding-bottom: 0px;">Enter Twitch.Tv Startup Page:</v-card-text>
                 <v-card-text style="padding-top: 0px;">
                     <v-form v-model="valid">
                         <v-text-field
@@ -30,7 +30,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn :disabled="!valid" style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="saveChanges">Apply</v-btn>
-					<v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="editTwitchPagePopup = false">Cancel</v-btn>
+                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="editTwitchPagePopup = false">Cancel</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
