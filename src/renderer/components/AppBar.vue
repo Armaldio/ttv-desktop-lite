@@ -16,11 +16,12 @@
                 <v-card-title class="abouttitle">
                     <span>Twitch.TV Startup Page</span>
                 </v-card-title>
-                <v-card-text>
+				<v-card-text style="padding-bottom: 0px;">Enter Twitch.Tv Startup Page:</v-card-text>
+                <v-card-text style="padding-top: 0px;">
                     <v-form v-model="valid">
                         <v-text-field
+                                style="margin-top: 0px;"
                                 :rules="textRules"
-                                label="Startup page"
                                 placeholder="https://twitch.tv"
                                 v-model="inputValue"
                         ></v-text-field>
@@ -28,7 +29,8 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn :disabled="!valid" color="primary" flat @click.stop="saveChanges">Save</v-btn>
+                    <v-btn :disabled="!valid" style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="saveChanges">Apply</v-btn>
+					<v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="editTwitchPagePopup = false">Cancel</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -42,7 +44,7 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary" flat @click.stop="aboutModal = false">Close</v-btn>
+                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="aboutModal = false">Close</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -85,6 +87,7 @@
             submenu: [
               {
                 label: 'Toggle Fullscreen',
+                role: 'toggleFullScreen',
                 accelerator: 'F11',
               },
               {
