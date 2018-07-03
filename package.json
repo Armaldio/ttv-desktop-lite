@@ -1,6 +1,6 @@
 {
-  "name": "twitchy-desktop-lite",
-  "version": "0.0.0",
+  "name": "ttv-desktop-lite",
+  "version": "0.1.0",
   "author": "Quentin Goinaud <armaldio@gmail.com>",
   "description": "The Lightweight Desktop App For Twitch.TV",
   "license": null,
@@ -18,9 +18,9 @@
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js"
   },
   "build": {
-    "productName": "twitchy-desktop-lite",
+    "productName": "ttv-desktop-lite",
     "asar": false,
-    "appId": "com.armaldio.twitchy-desktop-light",
+    "appId": "com.armaldio.ttv-desktop-light",
     "directories": {
       "output": "build"
     },

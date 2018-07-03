@@ -16,7 +16,7 @@
                 <v-card-title class="abouttitle">
                     <span>Twitch.TV Startup Page</span>
                 </v-card-title>
-                <v-card-text style="padding-bottom: 0px;">Enter Twitch.Tv Startup Page:</v-card-text>
+                <v-card-text class="aboutheadline" style="padding-bottom: 0px; font-size:10px; line-height: 0px;">Enter Your Startup Page:</v-card-text>
                 <v-card-text style="padding-top: 0px;">
                     <v-form v-model="valid">
                         <v-text-field
@@ -38,11 +38,13 @@
             <v-card>
                 <v-card-title class="abouttitle">About</v-card-title>
                 <v-card-text class="abouttext">
-                    <img width="150" src="/static/TTVDesktopLite_icon.png" alt="">
-                    <p class="aboutheadline">TTV Desktop Lite<br><span style="font-size:10px;">Version: <b>{{ pkg.version }}</b></span>
+                    <img width="200" src="/static/TTVDesktopLite_abouticon.png" alt="">
+                    <p class="aboutheadline"><span style="color: #fff; text-shadow: 0 2px 5px black;">TTV Desktop Lite</span><br><span style="font-size:10px; text-shadow: 0 0.5px 1px black;">Version: <b>{{ pkg.version }}</b></span>
                     </p>
                 </v-card-text>
                 <v-card-actions>
+                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: linear-gradient(135deg, rgba(234,185,45,1) 0%,rgba(199,152,16,1) 66%,rgba(199,152,16,1) 89%); text-shadow: 0 0.5px 1px black;" @click.stop="">♡ Donate</v-btn>
+                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #b60205; font-weight: normal;" @click.stop="">⚠ Report Bug</v-btn>
                     <v-spacer></v-spacer>
                     <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="aboutModal = false">Close</v-btn>
                 </v-card-actions>
@@ -361,19 +363,23 @@
     .abouttitle {
         font-family: Ethnocentric, Arial;
         border-bottom: 1px solid #3d384b;
-        background-color: #2c2541
+        background-color: #2c2541;
+        cursor: default;
     }
 
     .aboutheadline {
         font-family: Ethnocentric, Arial;
         font-size: 20px;
-        margin-top: 15px;
+        margin-top: 6px;
+        line-height: 18px;
+        cursor: default;
     }
 
     .abouttext {
         padding: 16px;
         width: 100%;
         text-align: center;
+        cursor: default;
     }
 
     .application .theme--dark.system-bar, .theme--dark .system-bar {
