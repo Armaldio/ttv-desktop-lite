@@ -20,7 +20,7 @@
                 <v-card-text style="padding-top: 0px;">
                     <v-form v-model="valid">
                         <v-text-field
-                                style="margin-top: 0px;"
+                                style="margin-top: 0px; filter: invert(1);"
                                 :rules="textRules"
                                 placeholder="https://twitch.tv"
                                 v-model="inputValue"
