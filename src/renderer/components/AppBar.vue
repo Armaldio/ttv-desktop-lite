@@ -29,8 +29,8 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn :disabled="!valid" style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="saveChanges">Apply</v-btn>
-                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="editTwitchPagePopup = false">Cancel</v-btn>
+                    <v-btn :disabled="!valid" style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="saveChanges">✓ Apply</v-btn>
+                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="editTwitchPagePopup = false">✕ Cancel</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -38,7 +38,7 @@
             <v-card>
                 <v-card-title class="abouttitle">About</v-card-title>
                 <v-card-text class="abouttext">
-                    <img width="200" src="/static/TTVDesktopLite_abouticon.png" alt="">
+                    <img width="150" src="/static/TTVDesktopLite_abouticon.png" alt="">
                     <p class="aboutheadline"><span style="color: #fff; text-shadow: 0 2px 5px black;">TTV Desktop Lite</span><br><span style="font-size:10px; text-shadow: 0 0.5px 1px black;">Version: <b>{{ pkg.version }}</b></span>
                     </p>
                 </v-card-text>
@@ -46,7 +46,7 @@
                     <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: linear-gradient(135deg, rgba(234,185,45,1) 0%,rgba(199,152,16,1) 66%,rgba(199,152,16,1) 89%); text-shadow: 0 0.5px 1px black;" @click.stop="">♡ Donate</v-btn>
                     <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #b60205; font-weight: normal;" @click.stop="">⚠ Report Bug</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="aboutModal = false">Close</v-btn>
+                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="aboutModal = false">✕ Close</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -136,6 +136,7 @@
               {
                 label: 'Reset Zoom To 100%',
                 sublabel: 'Current Zoom: ###curlevel###%',
+                accelerator: 'CmdOrCtrl+0',
                 click: () => {
                   this.zoomLevel = 0;
                 },
