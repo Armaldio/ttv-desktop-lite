@@ -38,7 +38,7 @@
             <v-card>
                 <v-card-title class="abouttitle">About</v-card-title>
                 <v-card-text class="abouttext">
-                    <img width="150" src="/static/TTVDesktopLite_abouticon.png" alt="">
+                    <img width="150" src="dist/electron/static/TTVDesktopLite_abouticon.png" alt="">
                     <p class="aboutheadline"><span style="color: #fff; text-shadow: 0 2px 5px black;">TTV Desktop Lite</span><br><span style="font-size:10px; text-shadow: 0 0.5px 1px black;">Version: <b>{{ pkg.version }}</b></span>
                     </p>
                 </v-card-text>
@@ -361,36 +361,6 @@
 </script>
 
 <style scoped>
-    .abouttitle {
-        font-family: Ethnocentric, Arial;
-        border-bottom: 1px solid #3d384b;
-        background-color: #2c2541;
-        cursor: default;
-    }
-
-    .aboutheadline {
-        font-family: Ethnocentric, Arial;
-        font-size: 20px;
-        margin-top: 6px;
-        line-height: 18px;
-        cursor: default;
-    }
-
-    .abouttext {
-        padding: 16px;
-        width: 100%;
-        text-align: center;
-        cursor: default;
-    }
-
-    .application .theme--dark.system-bar, .theme--dark .system-bar {
-        padding: 0;
-        height: 25px;
-        background-color: #2c2541;
-        -webkit-app-region: drag;
-        border-bottom: 1px solid #3d384b;
-    }
-
     @font-face {
         font-family: "Ethnocentric";
         src: url("/static/Ethnocentric.TTF");
@@ -412,6 +382,7 @@
         padding-right: 10px;
         margin-right: 0;
         background-color: transparent;
+        text-shadow: 0 0.5px 1px black;
     }
 
     .material-icons:hover {
@@ -435,5 +406,37 @@
         background-color: #201c2b;
         border: 1px solid #2c2541;
         color: #dad8de;
+    }
+
+    .abouttitle {
+        font-family: Ethnocentric, Arial;
+        border-bottom: 1px solid #3d384b;
+        background-color: #2c2541;
+        cursor: default;
+        text-shadow: 0 0.5px 1px black;
+    }
+
+    .aboutheadline {
+        font-family: Ethnocentric, Arial;
+        font-size: 20px;
+        margin-top: 6px;
+        line-height: 18px;
+        cursor: default;
+    }
+
+    .abouttext {
+        padding: 16px;
+        width: 100%;
+        text-align: center;
+        cursor: default;
+    }
+
+    .application .theme--dark.system-bar, .theme--dark .system-bar {
+        padding: 0;
+        height: 25px;
+        background-color: #2c2541;
+        -webkit-app-region: drag;
+        border-bottom: 1px solid #3d384b;
+        text-shadow: 0 0.5px 1px black;
     }
 </style>
