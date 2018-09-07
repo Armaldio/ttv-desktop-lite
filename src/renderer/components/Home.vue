@@ -70,8 +70,8 @@
             /* const remove = BrowserWindow.removeExtension(extensionPath);
           console.log('Removing ', remove); */
 
-            /* const installed = BrowserWindow.addExtension(extensionPath);
-          console.log('Installing ', installed); */
+            const installed = BrowserWindow.addExtension(extensionPath);
+            console.log('Installing ', installed);
           } else {
             console.log(`Missing ${extensionPath}`);
           }

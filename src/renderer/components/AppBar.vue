@@ -16,7 +16,9 @@
                 <v-card-title class="abouttitle">
                     <span>Twitch.TV Startup Page</span>
                 </v-card-title>
-                <v-card-text class="aboutheadline" style="padding-bottom: 0px; font-size:10px; line-height: 0px;">Enter Your Startup Page:</v-card-text>
+                <v-card-text class="aboutheadline" style="padding-bottom: 0px; font-size:10px; line-height: 0px;">Enter
+                    Your Startup Page:
+                </v-card-text>
                 <v-card-text style="padding-top: 0px;">
                     <v-form v-model="valid">
                         <v-text-field
@@ -29,8 +31,13 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn :disabled="!valid" style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="saveChanges">✓ Apply</v-btn>
-                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="editTwitchPagePopup = false">✕ Cancel</v-btn>
+                    <v-btn :disabled="!valid"
+                           style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;"
+                           @click.stop="saveChanges">✓ Apply
+                    </v-btn>
+                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;"
+                           @click.stop="editTwitchPagePopup = false">✕ Cancel
+                    </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -38,15 +45,23 @@
             <v-card>
                 <v-card-title class="abouttitle">About</v-card-title>
                 <v-card-text class="abouttext">
-                    <img width="150" src="dist/electron/static/TTVDesktopLite_abouticon.png" alt="">
-                    <p class="aboutheadline"><span style="color: #fff; text-shadow: 0 2px 5px black;">TTV Desktop Lite</span><br><span style="font-size:10px; text-shadow: 0 0.5px 1px black;">Version: <b>{{ pkg.version }}</b></span>
+                    <img width="150" src="/static/TTVDesktopLite_abouticon.png" alt="">
+                    <p class="aboutheadline"><span
+                            style="color: #fff; text-shadow: 0 2px 5px black;">TTV Desktop Lite</span><br><span
+                            style="font-size:10px; text-shadow: 0 0.5px 1px black;">Version: <b>{{ pkg.version }}</b></span>
                     </p>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: linear-gradient(135deg, rgba(234,185,45,1) 0%,rgba(199,152,16,1) 66%,rgba(199,152,16,1) 89%); text-shadow: 0 0.5px 1px black;" @click.stop="">♡ Donate</v-btn>
-                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #b60205; font-weight: normal;" @click.stop="">⚠ Report Bug</v-btn>
+                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: linear-gradient(135deg, rgba(234,185,45,1) 0%,rgba(199,152,16,1) 66%,rgba(199,152,16,1) 89%); text-shadow: 0 0.5px 1px black;"
+                           @click.stop="">♡ Donate
+                    </v-btn>
+                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #b60205; font-weight: normal;"
+                           @click.stop="">⚠ Report Bug
+                    </v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;" @click.stop="aboutModal = false">✕ Close</v-btn>
+                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;"
+                           @click.stop="aboutModal = false">✕ Close
+                    </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -75,7 +90,8 @@
 
         isFullScreen: false,
 
-        inputValue: this.$db.get('settings.defaultPage').value(),
+        inputValue: this.$db.get('settings.defaultPage')
+          .value(),
         textRules: [
           v => v.startsWith('https://twitch.tv') || 'Url must start with \'https://twitch.tv\'',
         ],
@@ -135,8 +151,7 @@
               },
               {
                 label: 'Reset Zoom To 100%',
-                sublabel: 'Current Zoom: ###curlevel###%',
-                accelerator: 'CmdOrCtrl+0',
+                sublabel: `Current Zoom: ${Math.round((1.2 ** this.zoomLevel) * 100)}%`,
                 click: () => {
                   this.zoomLevel = 0;
                 },
@@ -176,7 +191,8 @@
               },
               {
                 label: 'Set Twitch.TV Startup Page',
-                sublabel: this.$db.get('settings.defaultPage').value(),
+                sublabel: this.$db.get('settings.defaultPage')
+                  .value(),
                 click: () => {
                   this.editTwitchPagePopup = true;
                 },
@@ -316,14 +332,18 @@
     methods: {
       saveChanges() {
         // TODO https://github.com/pubkey/rxdb
-        this.$db.set('settings.defaultPage', this.inputValue).write();
+        this.$db.set('settings.defaultPage', this.inputValue)
+          .write();
         this.editTwitchPagePopup = false;
       },
       toggleRestore() {
-        if (this.$electron.remote.getCurrentWindow().isMaximized()) {
-          this.$electron.remote.getCurrentWindow().unmaximize();
+        if (this.$electron.remote.getCurrentWindow()
+          .isMaximized()) {
+          this.$electron.remote.getCurrentWindow()
+            .unmaximize();
         } else {
-          this.$electron.remote.getCurrentWindow().maximize();
+          this.$electron.remote.getCurrentWindow()
+            .maximize();
         }
       },
       showMenu() {
@@ -332,30 +352,50 @@
       },
     },
     mounted() {
-      this.$electron.remote.getCurrentWindow().webContents.on('did-attach-webview', () => {
-        this.webview = document.querySelector('#webview');
-        console.log('webview loaded', this.webview);
+      this.$electron.remote.getCurrentWindow()
+        .webContents
+        .on('did-attach-webview', () => {
+          this.webview = document.querySelector('#webview');
+          console.log('webview loaded', this.webview);
 
-        window.addEventListener('beforeunload', () => {
-          this.$electron.remote.getCurrentWindow().removeListener('enter-full-screen');
-          this.$electron.remote.getCurrentWindow().removeListener('leave-full-screen');
-        });
+          window.addEventListener('beforeunload', () => {
+            this.$electron.remote.getCurrentWindow()
+              .removeListener('enter-full-screen');
+            this.$electron.remote.getCurrentWindow()
+              .removeListener('leave-full-screen');
+          });
 
-        this.$electron.remote.getCurrentWindow().on('enter-full-screen', () => {
-          this.isFullScreen = true;
-        });
+          this.$electron.remote.getCurrentWindow()
+            .on('enter-full-screen', () => {
+              this.isFullScreen = true;
+            });
 
-        this.$electron.remote.getCurrentWindow().on('leave-full-screen', () => {
-          this.isFullScreen = false;
-        });
+          this.$electron.remote.getCurrentWindow()
+            .on('leave-full-screen', () => {
+              this.isFullScreen = false;
+            });
 
-        this.$electron.remote.getCurrentWindow().webContents.on('before-input-event', (event, input) => {
-          if (input.control && input.key === 'r') {
-            event.stopPropagation();
-            event.preventDefault();
-          }
+          this.$electron.remote.getCurrentWindow()
+            .webContents
+            .on('before-input-event', (event, input) => {
+              if (input.control && input.key === 'r') {
+                event.stopPropagation();
+                event.preventDefault();
+              }
+            });
+
+          window.addEventListener('keyup', (event) => {
+            if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Equal') {
+              this.zoomLevel += 1;
+            }
+            if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Digit6') {
+              this.zoomLevel -= 1;
+            }
+            if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Digit0') {
+              this.zoomLevel = 0;
+            }
+          }, true);
         });
-      });
     },
   };
 </script>
