@@ -400,7 +400,6 @@
             this.zoomLevel = 0;
           }
           if (event.ctrlKey /* && event.shiftKey */ && event.code === 'KeyR') {
-            event.stopPropagation();
             this.webview.reload();
           }
         }, true);
