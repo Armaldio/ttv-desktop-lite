@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "author": "Quentin Goinaud <armaldio@gmail.com>",
   "description": "The Lightweight Desktop App For Twitch.TV",
-  "license": null,
+  "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",

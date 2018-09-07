@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-system-bar class="system-bar" v-if="!isFullScreen" style="height: 28px;" window dark>
-            <v-icon @click="showMenu">menu</v-icon>
+            <v-icon v-if="isPageReady" @click="showMenu">menu</v-icon>
             <v-spacer></v-spacer>
             <v-toolbar-title class="main-title">
                 TTV Desktop Lite
@@ -100,6 +100,7 @@
 
         defaultTwitchPage: this.$db.get('settings.defaultPage')
           .value(),
+        isPageReady: false,
       };
     },
     computed: {
@@ -119,7 +120,6 @@
               },
               {
                 label: '↻ Reload',
-                accelerator: 'CmdOrCtrl+R',
                 click: () => {
                   this.webview.reload();
                 },
@@ -357,50 +357,71 @@
       },
     },
     mounted() {
+      /* Functions */
+      const enterFullScreen = () => {
+        this.isFullScreen = true;
+      };
+
+      const exitFullScreen = () => {
+        this.isFullScreen = false;
+      };
+
+      const beforeInputEvent = (event, input) => {
+        if (input.control && input.key === 'r') {
+          event.stopPropagation();
+          event.preventDefault();
+        }
+      };
+
+      const didAttachWebview = () => {
+        this.webview = document.querySelector('#webview');
+        console.log('webview loaded', this.webview);
+
+        this.isPageReady = true;
+
+        this.$electron.remote.getCurrentWindow()
+          .on('enter-full-screen', enterFullScreen);
+
+        this.$electron.remote.getCurrentWindow()
+          .on('leave-full-screen', exitFullScreen);
+
+        this.$electron.remote.getCurrentWindow()
+          .webContents
+          .on('before-input-event', beforeInputEvent);
+
+        window.addEventListener('keyup', (event) => {
+          if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Equal') {
+            this.zoomLevel += 1;
+          }
+          if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Digit6') {
+            this.zoomLevel -= 1;
+          }
+          if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Digit0') {
+            this.zoomLevel = 0;
+          }
+          if (event.ctrlKey /* && event.shiftKey */ && event.code === 'KeyR') {
+            event.stopPropagation();
+            this.webview.reload();
+          }
+        }, true);
+      };
+
+      /* Remove listeners */
+      window.addEventListener('beforeunload', () => {
+        this.$electron.remote.getCurrentWindow()
+          .removeListener('enter-full-screen', enterFullScreen);
+        this.$electron.remote.getCurrentWindow()
+          .removeListener('leave-full-screen', exitFullScreen);
+        this.$electron.remote.getCurrentWindow()
+          .removeListener('before-input-event', beforeInputEvent);
+        this.$electron.remote.getCurrentWindow()
+          .removeListener('did-attach-webview', didAttachWebview);
+      });
+
+      /* Wait for page to be loaded before running anything */
       this.$electron.remote.getCurrentWindow()
         .webContents
-        .on('did-attach-webview', () => {
-          this.webview = document.querySelector('#webview');
-          console.log('webview loaded', this.webview);
-
-          window.addEventListener('beforeunload', () => {
-            this.$electron.remote.getCurrentWindow()
-              .removeListener('enter-full-screen');
-            this.$electron.remote.getCurrentWindow()
-              .removeListener('leave-full-screen');
-          });
-
-          this.$electron.remote.getCurrentWindow()
-            .on('enter-full-screen', () => {
-              this.isFullScreen = true;
-            });
-
-          this.$electron.remote.getCurrentWindow()
-            .on('leave-full-screen', () => {
-              this.isFullScreen = false;
-            });
-
-          this.$electron.remote.getCurrentWindow()
-            .webContents
-            .on('before-input-event', (event, input) => {
-              if (input.control && input.key === 'r') {
-                event.stopPropagation();
-                event.preventDefault();
-              }
-            });
-
-          window.addEventListener('keyup', (event) => {
-            if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Equal') {
-              this.zoomLevel += 1;
-            }
-            if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Digit6') {
-              this.zoomLevel -= 1;
-            }
-            if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Digit0') {
-              this.zoomLevel = 0;
-            }
-          }, true);
-        });
+        .on('did-attach-webview', didAttachWebview);
     },
   };
 </script>
