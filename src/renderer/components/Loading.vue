@@ -103,7 +103,7 @@
 <style scoped>
     @font-face {
         font-family: "Ethnocentric";
-        src: url("/static/Ethnocentric.TTF");
+        src: url("/static/Ethnocentric.ttf");
     }
 
     html {

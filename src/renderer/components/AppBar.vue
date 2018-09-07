@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-system-bar v-if="!isFullScreen" style="height: 28px;" window dark>
+        <v-system-bar class="system-bar" v-if="!isFullScreen" style="height: 28px;" window dark>
             <v-icon @click="showMenu">menu</v-icon>
             <v-spacer></v-spacer>
             <v-toolbar-title class="main-title">
@@ -12,20 +12,22 @@
             <v-icon @click="$electron.remote.getCurrentWindow().close()" class="close">close</v-icon>
         </v-system-bar>
         <v-dialog v-model="editTwitchPagePopup" max-width="500px">
-            <v-card>
+            <v-card class="purple-bg">
                 <v-card-title class="abouttitle">
                     <span>Twitch.TV Startup Page</span>
                 </v-card-title>
-                <v-card-text class="aboutheadline" style="padding-bottom: 0px; font-size:10px; line-height: 0px;">Enter
+                <v-card-text class="aboutheadline" style="padding-bottom:0; font-size:10px; line-height:0;">Enter
                     Your Startup Page:
                 </v-card-text>
-                <v-card-text style="padding-top: 0px;">
+                <v-card-text style="padding-top:0;">
                     <v-form v-model="valid">
                         <v-text-field
-                                style="margin-top: 0px; filter: invert(1);"
+                                light
+                                style="margin-top:0; filter: invert(1);"
                                 :rules="textRules"
                                 placeholder="https://twitch.tv"
                                 v-model="inputValue"
+                                color="white"
                         ></v-text-field>
                     </v-form>
                 </v-card-text>
@@ -42,7 +44,7 @@
             </v-card>
         </v-dialog>
         <v-dialog v-model="aboutModal" max-width="500px">
-            <v-card>
+            <v-card class="purple-bg">
                 <v-card-title class="abouttitle">About</v-card-title>
                 <v-card-text class="abouttext">
                     <img width="150" src="/static/TTVDesktopLite_abouticon.png" alt="">
@@ -93,8 +95,11 @@
         inputValue: this.$db.get('settings.defaultPage')
           .value(),
         textRules: [
-          v => v.startsWith('https://twitch.tv') || 'Url must start with \'https://twitch.tv\'',
+          v => v.match(/^https:\/\/(www.)?twitch\.tv\/?/) !== null || 'Url must start with \'https://twitch.tv\'',
         ],
+
+        defaultTwitchPage: this.$db.get('settings.defaultPage')
+          .value(),
       };
     },
     computed: {
@@ -191,8 +196,7 @@
               },
               {
                 label: 'Set Twitch.TV Startup Page',
-                sublabel: this.$db.get('settings.defaultPage')
-                  .value(),
+                sublabel: this.defaultTwitchPage,
                 click: () => {
                   this.editTwitchPagePopup = true;
                 },
@@ -334,6 +338,7 @@
         // TODO https://github.com/pubkey/rxdb
         this.$db.set('settings.defaultPage', this.inputValue)
           .write();
+        this.defaultTwitchPage = this.inputValue;
         this.editTwitchPagePopup = false;
       },
       toggleRestore() {
@@ -403,11 +408,11 @@
 <style scoped>
     @font-face {
         font-family: "Ethnocentric";
-        src: url("/static/Ethnocentric.TTF");
+        src: url("/static/Ethnocentric.ttf");
     }
 
     .main-title {
-        font-family: Ethnocentric, Arial;
+        font-family: Ethnocentric, Arial, serif;
         font-size: 12px;
     }
 
@@ -441,15 +446,15 @@
         background-color: rgba(255, 0, 0, 0.75);
     }
 
-    .application .theme--light.card, .theme--light .card {
-        border-radius: 0px;
+    .theme--dark.v-card {
+        border-radius: 0;
         background-color: #201c2b;
         border: 1px solid #2c2541;
         color: #dad8de;
     }
 
     .abouttitle {
-        font-family: Ethnocentric, Arial;
+        font-family: Ethnocentric, Arial, serif;
         border-bottom: 1px solid #3d384b;
         background-color: #2c2541;
         cursor: default;
@@ -457,7 +462,7 @@
     }
 
     .aboutheadline {
-        font-family: Ethnocentric, Arial;
+        font-family: Ethnocentric, Arial, serif;
         font-size: 20px;
         margin-top: 6px;
         line-height: 18px;

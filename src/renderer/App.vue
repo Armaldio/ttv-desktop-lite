@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <v-app>
+        <v-app dark>
             <AppBar></AppBar>
             <v-content class="primary">
                 <v-container fluid fill-height style="background-color: #17141f !important; border-color: #17141f !important;">
