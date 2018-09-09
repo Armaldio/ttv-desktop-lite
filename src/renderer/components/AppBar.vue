@@ -5,7 +5,7 @@
                 TTV Desktop Lite
             </v-toolbar-title>
             <v-spacer></v-spacer>
-			<v-icon v-if="isPageReady" title="Install Updates">vertical_align_bottom</v-icon>
+            <v-icon v-if="isPageReady" title="Install Updates">vertical_align_bottom</v-icon>
             <v-icon v-if="isPageReady" @click="showMenu" style="margin-right:6px;" title="Settings">settings</v-icon>
             <v-icon @click="$electron.remote.getCurrentWindow().minimize()" style="padding-top:8px;">remove</v-icon>
             <v-icon @click="toggleRestore">crop_square</v-icon>
@@ -15,8 +15,8 @@
             <v-card class="purple-bg">
                 <v-card-title class="abouttitle">
                     <span>Twitch.TV Startup Page</span>
-					<v-spacer></v-spacer>
-					<v-icon style="padding:0px;" @click.stop="editTwitchPagePopup = false">close</v-icon>
+                    <v-spacer></v-spacer>
+                    <v-icon style="padding:0px;" @click.stop="editTwitchPagePopup = false">close</v-icon>
                 </v-card-title>
                 <v-card-text style="padding-top:0;" class="abouttext">
                 <v-card-text style="padding-bottom:0; margin-top:18px; font-size:10px; line-height:0; font-family: Ethnocentric, Arial, serif;">Enter Your Startup Page:
@@ -44,9 +44,9 @@
         <v-dialog v-model="aboutModal" max-width="500px">
             <v-card class="purple-bg">
                 <v-card-title class="abouttitle">About
-				<v-spacer></v-spacer>
-				<v-icon style="padding:0px;" @click.stop="aboutModal = false">close</v-icon>
-				</v-card-title>
+                <v-spacer></v-spacer>
+                <v-icon style="padding:0px;" @click.stop="aboutModal = false">close</v-icon>
+                </v-card-title>
                 <v-card-text class="abouttext">
                     <img width="150" src="/static/TTVDesktopLite_abouticon.png" alt="">
                     <p class="aboutheadline"><span
