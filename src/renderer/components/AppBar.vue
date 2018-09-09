@@ -16,10 +16,9 @@
                 <v-card-title class="abouttitle">
                     <span>Twitch.TV Startup Page</span>
                 </v-card-title>
-                <v-card-text class="aboutheadline" style="padding-bottom:0; font-size:10px; line-height:0;">Enter
-                    Your Startup Page:
+                <v-card-text class="aboutheadline" style="padding-bottom:0; font-size:10px; line-height:0; background-color: #17141f;">Enter Your Startup Page:
                 </v-card-text>
-                <v-card-text style="padding-top:0;">
+                <v-card-text style="padding-top:0;" class="abouttext">
                     <v-form v-model="valid">
                         <v-text-field
                                 light
@@ -31,7 +30,7 @@
                         ></v-text-field>
                     </v-form>
                 </v-card-text>
-                <v-card-actions>
+                <v-card-actions class="abouttext">
                     <v-spacer></v-spacer>
                     <v-btn :disabled="!valid"
                            style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;"
@@ -53,7 +52,7 @@
                             style="font-size:10px; text-shadow: 0 0.5px 1px black;">Version: <b>{{ pkg.version }}</b></span>
                     </p>
                 </v-card-text>
-                <v-card-actions>
+                <v-card-actions class="abouttext">
                     <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: linear-gradient(135deg, rgba(234,185,45,1) 0%,rgba(199,152,16,1) 66%,rgba(199,152,16,1) 89%); text-shadow: 0 0.5px 1px black;"
                            @click.stop="">♡ Donate
                     </v-btn>
@@ -120,6 +119,7 @@
               },
               {
                 label: '↻ Reload',
+                accelerator: 'CTRL+R',
                 click: () => {
                   this.webview.reload();
                 },
@@ -145,17 +145,17 @@
               {
                 label: '+ Zoom In',
                 click: () => {
-                  this.zoomLevel += 1;
+                  this.zoomLevel += 0.5;
                 },
               },
               {
                 label: '− Zoom Out',
                 click: () => {
-                  this.zoomLevel -= 1;
+                  this.zoomLevel -= 0.5;
                 },
               },
               {
-                label: 'Reset Zoom To 100%',
+                label: 'Reset To Actual Size',
                 sublabel: `Current Zoom: ${Math.round((1.2 ** this.zoomLevel) * 100)}%`,
                 click: () => {
                   this.zoomLevel = 0;
@@ -174,25 +174,13 @@
               },
               {
                 type: 'checkbox',
-                label: 'Enable Software Rendering Mode',
+                label: 'Enable Notifications (for TTV Desktop Lite)',
                 checked: false,
                 enabled: false,
               },
               {
                 type: 'separator',
                 visible: false,
-              },
-              {
-                type: 'checkbox',
-                label: 'Enable Notifications (for TTV Desktop Lite)',
-                checked: false,
-                enabled: false,
-              },
-              {
-                type: 'checkbox',
-                label: 'Enable Custom Sounds (for TTV Desktop Lite)',
-                checked: false,
-                enabled: false,
               },
               {
                 label: 'Set Twitch.TV Startup Page',
@@ -293,6 +281,16 @@
             label: 'Advanced',
             submenu: [
               {
+                type: 'checkbox',
+                label: 'Enable Software Rendering Mode',
+                checked: false,
+                enabled: false,
+              },
+              {
+                type: 'separator',
+                visible: false,
+              },
+              {
                 label: 'Purge Memory (RAM)',
                 enabled: false,
               },
@@ -391,10 +389,10 @@
 
         window.addEventListener('keyup', (event) => {
           if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Equal') {
-            this.zoomLevel += 1;
+            this.zoomLevel += 0.5;
           }
           if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Digit6') {
-            this.zoomLevel -= 1;
+            this.zoomLevel -= 0.5;
           }
           if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Digit0') {
             this.zoomLevel = 0;
@@ -484,7 +482,7 @@
     .aboutheadline {
         font-family: Ethnocentric, Arial, serif;
         font-size: 20px;
-        margin-top: 6px;
+		padding-top: 28px;
         line-height: 18px;
         cursor: default;
     }
@@ -492,6 +490,7 @@
     .abouttext {
         padding: 16px;
         width: 100%;
+		background-color: #17141f;
         text-align: center;
         cursor: default;
     }
