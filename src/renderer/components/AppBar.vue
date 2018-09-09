@@ -482,7 +482,7 @@
     .aboutheadline {
         font-family: Ethnocentric, Arial, serif;
         font-size: 20px;
-		padding-top: 28px;
+        padding-top: 28px;
         line-height: 18px;
         cursor: default;
     }
@@ -490,7 +490,7 @@
     .abouttext {
         padding: 16px;
         width: 100%;
-		background-color: #17141f;
+        background-color: #17141f;
         text-align: center;
         cursor: default;
     }
