@@ -1,13 +1,13 @@
 <template>
     <div>
-        <v-system-bar class="system-bar" v-if="!isFullScreen" style="height: 28px;" window dark>
-            <v-icon v-if="isPageReady" @click="showMenu">menu</v-icon>
-            <v-spacer></v-spacer>
+        <v-system-bar class="system-bar" v-if="!isFullScreen" style="height: 25px;" window dark>
             <v-toolbar-title class="main-title">
                 TTV Desktop Lite
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-icon @click="$electron.remote.getCurrentWindow().minimize()">remove</v-icon>
+			<v-icon v-if="isPageReady" title="Install Updates">vertical_align_bottom</v-icon>
+            <v-icon v-if="isPageReady" @click="showMenu" style="margin-right:6px;" title="Settings">settings</v-icon>
+            <v-icon @click="$electron.remote.getCurrentWindow().minimize()" style="padding-top:8px;">remove</v-icon>
             <v-icon @click="toggleRestore">crop_square</v-icon>
             <v-icon @click="$electron.remote.getCurrentWindow().close()" class="close">close</v-icon>
         </v-system-bar>
@@ -15,10 +15,12 @@
             <v-card class="purple-bg">
                 <v-card-title class="abouttitle">
                     <span>Twitch.TV Startup Page</span>
+					<v-spacer></v-spacer>
+					<v-icon style="padding:0px;" @click.stop="editTwitchPagePopup = false">close</v-icon>
                 </v-card-title>
-                <v-card-text class="aboutheadline" style="padding-bottom:0; font-size:10px; line-height:0; background-color: #17141f;">Enter Your Startup Page:
-                </v-card-text>
                 <v-card-text style="padding-top:0;" class="abouttext">
+                <v-card-text style="padding-bottom:0; margin-top:18px; font-size:10px; line-height:0; font-family: Ethnocentric, Arial, serif;">Enter Your Startup Page:
+                </v-card-text>
                     <v-form v-model="valid">
                         <v-text-field
                                 light
@@ -34,17 +36,17 @@
                     <v-spacer></v-spacer>
                     <v-btn :disabled="!valid"
                            style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;"
-                           @click.stop="saveChanges">✓ Apply
-                    </v-btn>
-                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;"
-                           @click.stop="editTwitchPagePopup = false">✕ Cancel
+                           @click.stop="saveChanges">Apply
                     </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
         <v-dialog v-model="aboutModal" max-width="500px">
             <v-card class="purple-bg">
-                <v-card-title class="abouttitle">About</v-card-title>
+                <v-card-title class="abouttitle">About
+				<v-spacer></v-spacer>
+				<v-icon style="padding:0px;" @click.stop="aboutModal = false">close</v-icon>
+				</v-card-title>
                 <v-card-text class="abouttext">
                     <img width="150" src="/static/TTVDesktopLite_abouticon.png" alt="">
                     <p class="aboutheadline"><span
@@ -54,14 +56,10 @@
                 </v-card-text>
                 <v-card-actions class="abouttext">
                     <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: linear-gradient(135deg, rgba(234,185,45,1) 0%,rgba(199,152,16,1) 66%,rgba(199,152,16,1) 89%); text-shadow: 0 0.5px 1px black;"
-                           @click.stop="">♡ Donate
+                           @click.stop="">Donate
                     </v-btn>
                     <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #b60205; font-weight: normal;"
-                           @click.stop="">⚠ Report Bug
-                    </v-btn>
-                    <v-spacer></v-spacer>
-                    <v-btn style="color: #fff; border: 1px solid transparent; border-radius: 2px; background: #4a3671; font-weight: normal;"
-                           @click.stop="aboutModal = false">✕ Close
+                           @click.stop="">Report Bug
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -192,7 +190,7 @@
             ],
           },
           {
-            label: 'Layout',
+            label: 'Layout Editor',
             submenu: [
               {
                 label: 'Streamer Layout (Example)',
@@ -247,14 +245,6 @@
           {
             label: 'Extensions',
             submenu: [
-              {
-                label: '↓ Update/Install Extensions And Restart',
-                enabled: false,
-              },
-              {
-                type: 'separator',
-                visible: false,
-              },
               {
                 label: 'TTVblock (Adblock)',
                 sublabel: 'Status: Up To Date',
@@ -439,10 +429,10 @@
         -webkit-user-select: none !important;
         transition: none;
         cursor: pointer;
-        height: 27px;
+        height: 25px;
         padding-top: 3px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 3px;
+        padding-right: 3px;
         margin-right: 0;
         background-color: transparent;
         text-shadow: 0 0.5px 1px black;
@@ -473,34 +463,32 @@
 
     .abouttitle {
         font-family: Ethnocentric, Arial, serif;
-        border-bottom: 1px solid #3d384b;
-        background-color: #2c2541;
+        background-image: radial-gradient(circle farthest-side at left center,#2c2541,#0e0c13 150%);
         cursor: default;
+        height: 40px;
         text-shadow: 0 0.5px 1px black;
     }
 
     .aboutheadline {
         font-family: Ethnocentric, Arial, serif;
         font-size: 20px;
-        padding-top: 28px;
-        line-height: 18px;
+        padding-top: 10px;
         cursor: default;
     }
 
     .abouttext {
-        padding: 16px;
+        background-image: radial-gradient(circle farthest-side at top center,#201c2b,#0e0c13 100%);
+        padding: 12px;
         width: 100%;
-        background-color: #17141f;
+        border-top: 2px solid #2c2541;
         text-align: center;
         cursor: default;
     }
 
     .application .theme--dark.system-bar, .theme--dark .system-bar {
-        padding: 0;
-        height: 25px;
-        background-color: #2c2541;
+        background-image: radial-gradient(circle farthest-side at left center,#201c2b,#0e0c13 100%);
         -webkit-app-region: drag;
-        border-bottom: 1px solid #3d384b;
+        padding: 0px;
         text-shadow: 0 0.5px 1px black;
     }
 </style>

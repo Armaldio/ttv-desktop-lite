@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" style="border: 1px solid #0e0c13">
         <v-app dark>
             <AppBar></AppBar>
             <v-content class="primary">
