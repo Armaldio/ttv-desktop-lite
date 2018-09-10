@@ -5,8 +5,20 @@
                 TTV Desktop Lite
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-icon v-if="isPageReady" title="Install Updates">vertical_align_bottom</v-icon>
+            <v-icon v-if="isPageReady" title="Show/Hide" @click.stop="SHOW/HIDEPAGESETTINGS_HERE;" style="padding-right:0px; padding-left:0px;">chevron_left</v-icon>
+
+            <v-icon v-if="isPageReady" title="Toggle Fullscreen" @click.stop="TOGGLEFULLSCREEN_HERE" style="margin-right:8px; margin-left:8px; padding-right:0px; padding-left:0px;">fullscreen</v-icon>
+
+            <v-icon v-if="isPageReady" title="Go Back" @click.stop="webview.goBack();" style="padding-right:0px; padding-left:0px;">arrow_back</v-icon>
+            <v-icon v-if="isPageReady" title="Reload Page" @click.stop="webview.reload();" style="padding-right:0px; padding-left:0px;">refresh</v-icon>
+            <v-icon v-if="isPageReady" title="Go Forward" @click.stop="webview.goForward()" style="margin-right:8px; padding-right:0px; padding-left:0px;">arrow_forward</v-icon>
+
+            <v-icon v-if="isPageReady" title="Zoom In" @click.stop="ZOOMIN_HERE" style="padding-right:0px; padding-left:0px;">zoom_in</v-icon>
+            <v-icon v-if="isPageReady" title="Reset To Actual Size" @click.stop="ZOOMRESET_HERE" style="padding-right:0px; padding-left:0px;">youtube_searched_for</v-icon>
+            <v-icon v-if="isPageReady" title="Zoom Out" @click.stop="ZOOMOUT_HERE" style="margin-right:8px; padding-right:0px; padding-left:0px;">zoom_out</v-icon>
+
             <v-icon v-if="isPageReady" @click="showMenu" style="margin-right:6px;" title="Settings">settings</v-icon>
+
             <v-icon @click="$electron.remote.getCurrentWindow().minimize()" style="padding-top:8px;">remove</v-icon>
             <v-icon @click="toggleRestore">crop_square</v-icon>
             <v-icon @click="$electron.remote.getCurrentWindow().close()" class="close">close</v-icon>
@@ -422,6 +434,7 @@
     .main-title {
         font-family: Ethnocentric, Arial, serif;
         font-size: 12px;
+        color: rgba(250, 250, 250, 1.0);
     }
 
     .material-icons {
@@ -443,11 +456,11 @@
     }
 
     .application .theme--dark.system-bar .icon, .theme--dark .system-bar .icon {
-        color: rgba(150, 150, 150, 1.0);
+        color: rgba(120, 120, 120, 1.0);
     }
 
     .application:hover .theme--dark.system-bar .icon:hover, .theme--dark:hover .system-bar:hover .icon:hover {
-        color: rgba(255, 255, 255, 1.0);
+        color: rgba(220, 220, 220, 1.0);
     }
 
     .close:hover {
