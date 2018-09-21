@@ -39,7 +39,7 @@
 <style>
     /* CSS */
     html {
-        /*overflow: hidden;*/
+        overflow: hidden;
         margin: 0;
         padding: 0;
         user-select: none !important;
@@ -47,7 +47,6 @@
     }
 
     #app {
-        /*overflow: hidden;*/
         margin: 0;
     }
 

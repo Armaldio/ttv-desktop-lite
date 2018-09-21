@@ -5,17 +5,17 @@
                 TTV Desktop Lite
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-icon v-if="isPageReady" title="Show/Hide" @click.stop="SHOW/HIDEPAGESETTINGS_HERE;" style="padding-right:0px; padding-left:0px;">chevron_left</v-icon>
+            <v-icon v-if="isPageReady" title="Show/Hide" @click.stop="" style="padding-right:0px; padding-left:0px;">chevron_left</v-icon>
 
-            <v-icon v-if="isPageReady" title="Toggle Fullscreen" @click.stop="TOGGLEFULLSCREEN_HERE" style="margin-right:8px; margin-left:8px; padding-right:0px; padding-left:0px;">fullscreen</v-icon>
+            <v-icon v-if="isPageReady" title="Toggle Fullscreen" @click.stop="toggleFullscreen()" style="margin-right:8px; margin-left:8px; padding-right:0px; padding-left:0px;">fullscreen</v-icon>
 
-            <v-icon v-if="isPageReady" title="Go Back" @click.stop="webview.goBack();" style="padding-right:0px; padding-left:0px;">arrow_back</v-icon>
-            <v-icon v-if="isPageReady" title="Reload Page" @click.stop="webview.reload();" style="padding-right:0px; padding-left:0px;">refresh</v-icon>
+            <v-icon v-if="isPageReady" title="Go Back" @click.stop="webview.goBack()" style="padding-right:0px; padding-left:0px;">arrow_back</v-icon>
+            <v-icon v-if="isPageReady" title="Reload Page" @click.stop="webview.reload()" style="padding-right:0px; padding-left:0px;">refresh</v-icon>
             <v-icon v-if="isPageReady" title="Go Forward" @click.stop="webview.goForward()" style="margin-right:8px; padding-right:0px; padding-left:0px;">arrow_forward</v-icon>
 
-            <v-icon v-if="isPageReady" title="Zoom In" @click.stop="ZOOMIN_HERE" style="padding-right:0px; padding-left:0px;">zoom_in</v-icon>
-            <v-icon v-if="isPageReady" title="Reset To Actual Size" @click.stop="ZOOMRESET_HERE" style="padding-right:0px; padding-left:0px;">youtube_searched_for</v-icon>
-            <v-icon v-if="isPageReady" title="Zoom Out" @click.stop="ZOOMOUT_HERE" style="margin-right:8px; padding-right:0px; padding-left:0px;">zoom_out</v-icon>
+            <v-icon v-if="isPageReady" title="Zoom In" @click.stop="zoomLevel += 0.5" style="padding-right:0px; padding-left:0px;">zoom_in</v-icon>
+            <v-icon v-if="isPageReady" title="Reset To Actual Size" @click.stop="zoomLevel = 0" style="padding-right:0px; padding-left:0px;">youtube_searched_for</v-icon>
+            <v-icon v-if="isPageReady" title="Zoom Out" @click.stop="zoomLevel -= 0.5" style="margin-right:8px; padding-right:0px; padding-left:0px;">zoom_out</v-icon>
 
             <v-icon v-if="isPageReady" @click="showMenu" style="margin-right:6px;" title="Settings">settings</v-icon>
 
@@ -334,6 +334,13 @@
       },
     },
     methods: {
+      toggleFullscreen() {
+        if (this.$electron.remote.getCurrentWindow().isFullScreen()) {
+          this.$electron.remote.getCurrentWindow().setFullScreen(false);
+        } else {
+          this.$electron.remote.getCurrentWindow().setFullScreen(true);
+        }
+      },
       saveChanges() {
         // TODO https://github.com/pubkey/rxdb
         this.$db.set('settings.defaultPage', this.inputValue)
@@ -367,9 +374,11 @@
       };
 
       const beforeInputEvent = (event, input) => {
+        if (input.control && input.alt && input.key === 'r') {
+          this.$electron.remote.getCurrentWindow().reload();
+        }
         if (input.control && input.key === 'r') {
-          event.stopPropagation();
-          event.preventDefault();
+          this.webview.reload();
         }
       };
 
@@ -388,21 +397,6 @@
         this.$electron.remote.getCurrentWindow()
           .webContents
           .on('before-input-event', beforeInputEvent);
-
-        window.addEventListener('keyup', (event) => {
-          if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Equal') {
-            this.zoomLevel += 0.5;
-          }
-          if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Digit6') {
-            this.zoomLevel -= 0.5;
-          }
-          if (event.ctrlKey /* && event.shiftKey */ && event.code === 'Digit0') {
-            this.zoomLevel = 0;
-          }
-          if (event.ctrlKey /* && event.shiftKey */ && event.code === 'KeyR') {
-            this.webview.reload();
-          }
-        }, true);
       };
 
       /* Remove listeners */
