@@ -1,5 +1,5 @@
 <template>
-    <div id="app" style="border: 1px solid #0e0c13">
+    <div id="app">
         <v-app dark>
             <AppBar></AppBar>
             <v-content class="primary">
@@ -39,14 +39,20 @@
 <style>
     /* CSS */
     html {
-        overflow: hidden;
+        /*overflow: hidden;*/
+        margin: 0;
+        padding: 0;
         user-select: none !important;
         -webkit-user-select: none !important;
     }
 
     #app {
-        overflow: hidden;
+        /*overflow: hidden;*/
         margin: 0;
+    }
+
+    .application--wrap {
+        border: 1px solid #0e0c13;
     }
 
     .container {

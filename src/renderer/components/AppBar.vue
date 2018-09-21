@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-system-bar class="system-bar" v-if="!isFullScreen" style="height: 25px;" window dark>
-            <v-toolbar-title class="main-title">
+            <v-toolbar-title class="main-title ml-2">
                 TTV Desktop Lite
             </v-toolbar-title>
             <v-spacer></v-spacer>

@@ -2,8 +2,7 @@
     <div id="wrapper">
         <main>
             <webview id="webview" :src="startPage" webpreferences="nativeWindowOpen=true"
-                     :preload="preload" allowpopups plugins
-                     style="display:inline-flex; width:100%; height:100vh; background-color: #17141f !important; border-color: #17141f !important;"></webview>
+                     :preload="preload" allowpopups plugins></webview>
         </main>
     </div>
 </template>
@@ -96,10 +95,6 @@
 </script>
 
 <style scoped>
-    html {
-        overflow: hidden;
-    }
-
     main {
         width: 100%;
         height: 100%;
@@ -107,5 +102,18 @@
 
     #wrapper {
         width: 100%;
+    }
+
+    #webview {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        display: inline-flex !important;
+
+        background-color: #17141f !important;
+        border-color: #17141f !important;
     }
 </style>
